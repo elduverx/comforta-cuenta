@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Comforta Extractor",
+  "version": "1.0",
+  "description": "Extrae datos financieros de Uber, Cabify y Bolt hacia Comforta Cuentas",
+  "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.uber.com/*",
+    "https://*.cabify.com/*",
+    "https://*.bolt.eu/*",
+    "http://localhost:3000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.uber.com/*",
+        "*://uber.com/*",
+        "*://*.cabify.com/*",
+        "*://cabify.com/*",
+        "*://*.bolt.eu/*",
+        "*://bolt.eu/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

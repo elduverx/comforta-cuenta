@@ -1,0 +1,1177 @@
+{
+  "2026-W32": [
+    {
+      "id": "d1",
+      "name": "EDWARD FERNANDO ASTAIZA GARCIA",
+      "initials": "EF",
+      "platforms": {
+        "uber": {
+          "invoiced": 479.46,
+          "cash": 47.43,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 290.48,
+          "cash": 56.86,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 172.95,
+          "cash": 16.85,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178818410777642",
+      "name": "JOSE DOMINGO ACOSTA CAICEDO",
+      "initials": "JD",
+      "platforms": {
+        "uber": {
+          "invoiced": 239.12,
+          "cash": 40.87,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      },
+      "photoUrl": "/avatars/migrated_jose_domingo_acosta_caicedo.png",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM"
+    },
+    {
+      "id": "d178818410777657",
+      "name": "GREGORY JOSE MARQUEZ MENDEZ",
+      "initials": "GJ",
+      "platforms": {
+        "uber": {
+          "invoiced": 237.77,
+          "cash": 65.65,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      },
+      "photoUrl": "/avatars/migrated_gregory_jose_marquez_mendez.jpg",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM"
+    },
+    {
+      "id": "d178818410777650",
+      "name": "SANTIAGO FORERO RODRIGUEZ",
+      "initials": "SF",
+      "platforms": {
+        "uber": {
+          "invoiced": 17.39,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      },
+      "photoUrl": "/avatars/migrated_santiago_forero_rodriguez.jpg",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM"
+    },
+    {
+      "id": "d178819022561753",
+      "name": "Jose Domingo Acosta Caicedo",
+      "initials": "JD",
+      "admin": "OB",
+      "dateRange": "03/08/2026 a 09/08/2026 (S32)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 156.44,
+          "cash": 14.52,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d17881902256179",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "admin": "OB",
+      "dateRange": "03/08/2026 a 09/08/2026 (S32)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 98.04,
+          "cash": 25.26,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819022561765",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "OB",
+      "dateRange": "03/08/2026 a 09/08/2026 (S32)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 12.72,
+          "cash": 5.93,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819022561711",
+      "name": "Oscar Alejandro Bedoya Monsalve",
+      "initials": "OA",
+      "admin": "OB",
+      "dateRange": "03/08/2026 a 09/08/2026 (S32)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "2026-W36": [
+    {
+      "id": "d178819061118344",
+      "name": "JOSE DOMINGO ACOSTA CAICEDO",
+      "initials": "JD",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM",
+      "photoUrl": "/avatars/migrated_jose_domingo_acosta_caicedo.png",
+      "platforms": {
+        "uber": {
+          "invoiced": 239.12,
+          "cash": 40.87,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819061118323",
+      "name": "GREGORY JOSE MARQUEZ MENDEZ",
+      "initials": "GJ",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM",
+      "photoUrl": "/avatars/migrated_gregory_jose_marquez_mendez.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 237.77,
+          "cash": 65.65,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819061118377",
+      "name": "SANTIAGO FORERO RODRIGUEZ",
+      "initials": "SF",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM",
+      "photoUrl": "/avatars/migrated_santiago_forero_rodriguez.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 17.39,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "2026-W35": [
+    {
+      "id": "d178819112923992",
+      "name": "Jose Domingo Acosta Caicedo",
+      "initials": "JD",
+      "admin": "Install our mobile app!",
+      "dateRange": "Aug 24th, 2026 04:00 AM - Aug 31st, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_jose_domingo_acosta_caicedo.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1376.68,
+          "cash": 122.95,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 67.95,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820731782954",
+      "name": "Santiago Forero Rodriguez",
+      "initials": "SF",
+      "admin": "Install our mobile app!",
+      "dateRange": "Aug 24th, 2026 04:00 AM - Aug 31st, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_santiago_forero_rodriguez.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1320.98,
+          "cash": 211.23,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 8.03,
+          "cash": 10.7,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820731783185",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "Install our mobile app!",
+      "dateRange": "Aug 24th, 2026 04:00 AM - Aug 31st, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_shaukat_ali_khan_bibi.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1370.45,
+          "cash": 225.21,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 184.46,
+          "cash": 76.65,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178827016203074",
+      "name": "GREGORY JOSE MARQUEZ MENDEZ",
+      "initials": "GJ",
+      "admin": "Install our mobile app!",
+      "dateRange": "Aug 24th, 2026 04:00 AM - Aug 31st, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_gregory_jose_marquez_mendez.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1282.78,
+          "cash": 174.86,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "master_drivers": {
+    "jose domingo acosta caicedo": {
+      "id": "d178819112923992",
+      "name": "Jose Domingo Acosta Caicedo",
+      "initials": "JD",
+      "photoUrl": "/avatars/uber_jose_domingo_acosta_caicedo.jpg",
+      "admin": "Install our mobile app!",
+      "firstSeen": "2026-08-31T15:58:29.971Z"
+    },
+    "gregory jose marquez mendez": {
+      "id": "d178819061118323",
+      "name": "GREGORY JOSE MARQUEZ MENDEZ",
+      "initials": "GJ",
+      "photoUrl": "/avatars/uber_gregory_jose_marquez_mendez.jpg",
+      "admin": "Operaciones",
+      "firstSeen": "2026-08-31T15:58:52.811Z"
+    },
+    "santiago forero rodriguez": {
+      "id": "d178819061118377",
+      "name": "SANTIAGO FORERO RODRIGUEZ",
+      "initials": "SF",
+      "photoUrl": "/avatars/uber_santiago_forero_rodriguez.jpg",
+      "admin": "Install our mobile app!",
+      "firstSeen": "2026-08-31T15:58:52.812Z"
+    },
+    "orluis rafael salazar linares": {
+      "id": "d178819589511878",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "photoUrl": null,
+      "admin": "Operaciones",
+      "firstSeen": "2026-08-31T17:04:55.118Z"
+    },
+    "shaukat ali khan bibi": {
+      "id": "d178819589511810",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "photoUrl": "/avatars/uber_shaukat_ali_khan_bibi.jpg",
+      "admin": "Operaciones",
+      "firstSeen": "2026-08-31T17:04:55.118Z"
+    },
+    "oscar alejandro bedoya monsalve": {
+      "id": "d178819589511958",
+      "name": "Oscar Alejandro Bedoya Monsalve",
+      "initials": "OA",
+      "photoUrl": null,
+      "admin": "OB",
+      "firstSeen": "2026-08-31T17:04:55.119Z"
+    }
+  },
+  "2026-W33": [
+    {
+      "id": "d178819589511741",
+      "name": "Jose Domingo Acosta Caicedo",
+      "initials": "JD",
+      "admin": "OB",
+      "dateRange": "10/08/2026 a 16/08/2026 (S33)",
+      "photoUrl": "/avatars/migrated_jose_domingo_acosta_caicedo.png",
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 58.28,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819589511878",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "admin": "OB",
+      "dateRange": "10/08/2026 a 16/08/2026 (S33)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 58.26,
+          "cash": 39.84,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819589511810",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "OB",
+      "dateRange": "10/08/2026 a 16/08/2026 (S33)",
+      "photoUrl": "/avatars/migrated_shaukat_ali_khan_bibi.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 15.93,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178819589511958",
+      "name": "Oscar Alejandro Bedoya Monsalve",
+      "initials": "OA",
+      "admin": "OB",
+      "dateRange": "10/08/2026 a 16/08/2026 (S33)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "2026-W34": [
+    {
+      "id": "d17882044060304",
+      "name": "GREGORY JOSE MARQUEZ MENDEZ",
+      "initials": "GJ",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 17th, 2026 04:00 AM - Aug 24th, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_gregory_jose_marquez_mendez.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1616.55,
+          "cash": 194.65,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820440603048",
+      "name": "JOSE DOMINGO ACOSTA CAICEDO",
+      "initials": "JD",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 17th, 2026 04:00 AM - Aug 24th, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_jose_domingo_acosta_caicedo.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1394.26,
+          "cash": 289.73,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d17882044060313",
+      "name": "SANTIAGO FORERO RODRIGUEZ",
+      "initials": "SF",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 17th, 2026 04:00 AM - Aug 24th, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_santiago_forero_rodriguez.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1373.8,
+          "cash": 208.22,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820440603151",
+      "name": "SHAUKAT ALI KHAN BIBI",
+      "initials": "SA",
+      "admin": "Oscar Alejand...",
+      "dateRange": "Aug 17th, 2026 04:00 AM - Aug 24th, 2026 04:00 AM",
+      "photoUrl": "/avatars/uber_shaukat_ali_khan_bibi.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 1040.8,
+          "cash": 202.75,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "2026-W28": [
+    {
+      "id": "d178820449759797",
+      "name": "Jose Domingo Acosta Caicedo",
+      "initials": "JD",
+      "admin": "OB",
+      "dateRange": "06/07/2026 a 12/07/2026 (S28)",
+      "photoUrl": "/avatars/cabify_jose_domingo_acosta_caicedo.png",
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 331.45,
+          "cash": 15.34,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d17882044975980",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "OB",
+      "dateRange": "06/07/2026 a 12/07/2026 (S28)",
+      "photoUrl": "/avatars/cabify_shaukat_ali_khan_bibi.jpg",
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 191.01,
+          "cash": 85.58,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820449759883",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "admin": "OB",
+      "dateRange": "06/07/2026 a 12/07/2026 (S28)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 109.24,
+          "cash": 20.99,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820449759914",
+      "name": "Oscar Alejandro Bedoya Monsalve",
+      "initials": "OA",
+      "admin": "OB",
+      "dateRange": "06/07/2026 a 12/07/2026 (S28)",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "UNKNOWN": [
+    {
+      "id": "d178820701853274",
+      "name": "Santiago Forero Rodriguez",
+      "initials": "SF",
+      "admin": "Operaciones",
+      "dateRange": "Semana Actual",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 8.03,
+          "cash": 10.7,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178820701853325",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "Operaciones",
+      "dateRange": "Semana Actual",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 143.21,
+          "cash": 49.4,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178827341684397",
+      "name": "Gregory Jose Marquez Mendez",
+      "initials": "GJ",
+      "admin": "Operaciones",
+      "dateRange": "Semana Actual",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 38.44,
+          "cash": 46.15,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178827341684485",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "admin": "Operaciones",
+      "dateRange": "Semana Actual",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 1371.61,
+          "cash": 367.05,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "2026-W31": [
+    {
+      "id": "d178827315540846",
+      "name": "Gregory Jose Marquez Mendez",
+      "initials": "GJ",
+      "admin": "Operaciones",
+      "dateRange": "27 jul - 2 ago",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 355.35,
+          "cash": 236.25,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178827315540827",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "admin": "Operaciones",
+      "dateRange": "27 jul - 2 ago",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 511.71,
+          "cash": 125.65,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d17882731554095",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "Operaciones",
+      "dateRange": "27 jul - 2 ago",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 118.75,
+          "cash": 7.9,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ],
+  "2026-W30": [
+    {
+      "id": "d178827333120621",
+      "name": "Gregory Jose Marquez Mendez",
+      "initials": "GJ",
+      "admin": "Operaciones",
+      "dateRange": "20 jul - 26 ago",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 38.44,
+          "cash": 46.15,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d178827333120748",
+      "name": "Orluis Rafael Salazar Linares",
+      "initials": "OR",
+      "admin": "Operaciones",
+      "dateRange": "20 jul - 26 ago",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 1371.61,
+          "cash": 367.05,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    },
+    {
+      "id": "d17882733312075",
+      "name": "Shaukat Ali Khan Bibi",
+      "initials": "SA",
+      "admin": "Operaciones",
+      "dateRange": "20 jul - 26 ago",
+      "photoUrl": null,
+      "platforms": {
+        "uber": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "cabify": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        },
+        "bolt": {
+          "invoiced": 143.21,
+          "cash": 49.4,
+          "bonuses": 0
+        },
+        "privados": {
+          "invoiced": 0,
+          "cash": 0,
+          "bonuses": 0
+        }
+      }
+    }
+  ]
+}

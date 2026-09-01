@@ -1,0 +1,213 @@
+Operaciones
+Finanzas
+Flota
+Configuración
+
+OSCAR ALEJANDRO BEDOYA MONSALVE
+
+Ingresos por conductor
+Resumen de los ingresos de la empresa y de los conductores. Los ingresos se registran cuando la tarifa es final, no cuando se hace el viaje. Las revisiones de precios, los ajustes o las propinas pueden cambiar cuando la tarifa es final. Para más información sobre términos y lo que significan, accede a nuestro glosario.
+Personalizado
+Ingresos brutos (total)
+2025,6
+€
+Total tasas
+472,34
+€
+Ingresos netos
+1553,26
+€
+Ingresos de campañas de flotas
+120,25
+€
+Reembolsos de gastos de la flota
+0
+€
+Ingresos brutos por hora
+35,02
+€/h
+Ingresos netos por hora
+26,86
+€/h
+Descargar
+Conductor/a
+	
+Ingresos brutos (total)
+	
+Ingresos brutos (pagos en la app)
+	
+Ingresos brutos (pagos en efectivo)
+	
+Efectivo recaudado
+	
+Propinas de pasajeros
+	
+Ingresos de campañas
+	
+Reembolsos de gastos
+	
+Tasas de cancelación
+	
+Ingresos netos
+	
+Ingresos brutos por hora
+	
+Ingresos netos por hora
+	
+Descuento en la comisión (en la app)
+	
+Descuento en la comisión (efectivo)
+
+
+Gregory Jose Marquez Mendez
+	
+51,25
+€
+	
+—
+IVA:
+—
+	
+51,25
+€
+IVA:
+4,2
+€
+	
+46,15
+€
+	
+—
+	
+—
+IVA:
+—
+	
+—
+IVA:
+—
+	
+—
+IVA:
+—
+	
+38,44
+€
+	
+34,19
+€/h
+	
+25,64
+€/h
+	
+—
+	
+5,1
+€
+
+
+Orluis Rafael Salazar Linares
+	
+1783,4
+€
+	
+1115,65
+€
+IVA:
+79,83
+€
+	
+517,5
+€
+IVA:
+33,38
+€
+	
+367,05
+€
+	
+16,0
+€
+	
+120,25
+€
+IVA:
+—
+	
+—
+IVA:
+—
+	
+14,0
+€
+IVA:
+1,28
+€
+	
+1371,61
+€
+	
+36,27
+€/h
+	
+27,9
+€/h
+	
+237,8
+€
+	
+150,45
+€
+
+
+Shaukat Ali Khan Bibi
+	
+190,95
+€
+	
+116,6
+€
+IVA:
+8,32
+€
+	
+67,35
+€
+IVA:
+4,5
+€
+	
+49,4
+€
+	
+—
+	
+—
+IVA:
+—
+	
+—
+IVA:
+—
+	
+7,0
+€
+IVA:
+0,64
+€
+	
+143,21
+€
+	
+26,74
+€/h
+	
+20,06
+€/h
+	
+25,15
+€
+	
+17,95
+€
+Sincronizando...

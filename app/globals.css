@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Fix react-day-picker tailwind reset issues */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #000000;
+  --rdp-background-color: #f3f4f6;
+  margin: 0 !important;
+}
+.rdp-weeknumber-header {
+  visibility: hidden;
+}
+.rdp-day_selected {
+  font-weight: bold;
+}
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: #f3f4f6;
+}
