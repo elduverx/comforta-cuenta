@@ -33,26 +33,24 @@ const calculateTotals = (platforms: Record<string, { invoiced: number; cash: num
   const platformsList = ['uber', 'cabify', 'bolt', 'privados'];
   let totalBruto = 0;
   let totalEfectivo = 0;
-  let totalBonos = 0;
 
   platformsList.forEach((p) => {
     if (platforms[p]) {
       totalBruto += platforms[p].invoiced;
       totalEfectivo += platforms[p].cash;
-      totalBonos += platforms[p].bonuses;
     }
   });
 
   // Ingreso Neto Admin (65% del total bruto es para la empresa/dueño del vehículo)
   const ingresoNetoAdmin = totalBruto * 0.65; 
   
-  // Ingreso Neto Flota/Conductor (35% del total bruto + 100% de los bonos)
-  const gananciaConductor = (totalBruto * 0.35) + totalBonos; 
+  // Ingreso Neto Flota/Conductor (35% del total bruto)
+  const gananciaConductor = totalBruto * 0.35; 
   
   // Balance final (lo que le toca al conductor menos el efectivo que ya tiene en su bolsillo)
   const balanceFinal = gananciaConductor - totalEfectivo; 
 
-  return { totalBruto, totalEfectivo, totalBonos, ingresoNetoAdmin, gananciaConductor, balanceFinal };
+  return { totalBruto, totalEfectivo, ingresoNetoAdmin, gananciaConductor, balanceFinal };
 };
 
 import { addWeeks, subWeeks, format, startOfWeek, endOfWeek, addMonths, subMonths, getISOWeek } from "date-fns";
@@ -61,6 +59,8 @@ import { DayPicker, type DateRange } from "react-day-picker";
 import "react-day-picker/style.css";
 
 export default function UberStyleDashboard() {
+  const [currentProfile, setCurrentProfile] = useState("Oscar");
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [driversData, setDriversData] = useState<Driver[]>([]);
   const [masterDrivers, setMasterDrivers] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("Liquidaciones");
@@ -68,7 +68,7 @@ export default function UberStyleDashboard() {
 
   useEffect(() => {
     const fetchMaster = () => {
-      fetch('/api/drivers?type=master')
+      fetch(`/api/drivers?type=master&admin=${currentProfile}`)
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {
@@ -81,7 +81,7 @@ export default function UberStyleDashboard() {
     fetchMaster();
     const interval = setInterval(fetchMaster, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentProfile]);
 
   // Calendar State
   const [viewMode, setViewMode] = useState<'week' | 'month' | 'custom'>('week');
@@ -114,7 +114,7 @@ export default function UberStyleDashboard() {
     const endStr = selectedRange.to.toISOString();
 
     const fetchDrivers = () => {
-      fetch(`/api/drivers?start=${startStr}&end=${endStr}`)
+      fetch(`/api/drivers?start=${startStr}&end=${endStr}&admin=${currentProfile}`)
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {
@@ -127,7 +127,7 @@ export default function UberStyleDashboard() {
     fetchDrivers();
     const interval = setInterval(fetchDrivers, 3000);
     return () => clearInterval(interval);
-  }, [selectedRange]);
+  }, [selectedRange, currentProfile]);
 
   const tabs = [
     "Inicio", "Liquidaciones", "Socios conductores", "Vehículos", "Reportes"
@@ -178,10 +178,32 @@ export default function UberStyleDashboard() {
             <span className="text-gray-400">|</span>
             <span className="font-medium text-gray-700">Flotas</span>
           </div>
-          <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <div className="flex items-center gap-4 relative">
+            <button 
+              onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+              className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-colors font-semibold"
+            >
               <CircleUser className="w-6 h-6 text-gray-600" />
+              <span>{currentProfile}</span>
+              <ChevronDown className="w-4 h-4 text-gray-500" />
             </button>
+            
+            {isProfileMenuOpen && (
+              <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-lg py-2 z-50">
+                <button 
+                  onClick={() => { setCurrentProfile("Oscar"); setIsProfileMenuOpen(false); }}
+                  className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${currentProfile === "Oscar" ? "font-bold text-black" : "text-gray-600"}`}
+                >
+                  Oscar
+                </button>
+                <button 
+                  onClick={() => { setCurrentProfile("Eglee"); setIsProfileMenuOpen(false); }}
+                  className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${currentProfile === "Eglee" ? "font-bold text-black" : "text-gray-600"}`}
+                >
+                  Eglee
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -213,6 +235,17 @@ export default function UberStyleDashboard() {
             <p className="text-sm text-gray-500 mt-1">Gestiona las ganancias y balances de tu flota de conductores.</p>
           </div>
           <div className="flex gap-2">
+            <button 
+              onClick={async () => {
+                if (window.confirm("¿Estás seguro de borrar los datos? Para tener de nuevo la cuenta deberá simular nuevamente.")) {
+                  await fetch(`/api/clear?admin=${currentProfile}`, { method: 'POST' });
+                  window.location.reload();
+                }
+              }}
+              className="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg shadow hover:bg-red-700 transition"
+            >
+              Borrar Datos
+            </button>
             <button className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg shadow hover:bg-gray-800 transition">
               Descargar Reporte
             </button>
@@ -338,7 +371,6 @@ export default function UberStyleDashboard() {
                     <th className="w-8 py-4"></th>
                     <th className="py-4 font-semibold text-gray-500 text-xs uppercase tracking-wider">Conductor</th>
                     <th className="py-4 font-semibold text-gray-500 text-xs uppercase tracking-wider text-right">Ganancias<br/>en Efectivo</th>
-                    <th className="py-4 font-semibold text-gray-500 text-xs uppercase tracking-wider text-right">Bonos<br/>Extras</th>
                     <th className="py-4 font-bold text-blue-700 text-xs uppercase tracking-wider text-right">Ingreso Neto<br/>Admin (65%)</th>
                     <th className="py-4 font-bold text-emerald-700 text-xs uppercase tracking-wider text-right">Ingreso Neto<br/>Flota (35%)</th>
                     <th className="py-4 font-bold text-gray-900 text-xs uppercase tracking-wider text-right pr-6">Ganancias<br/>Totales</th>
@@ -389,7 +421,6 @@ export default function UberStyleDashboard() {
                             </div>
                           </td>
                           <td className="py-4 text-right text-orange-600 font-medium">€{totals.totalEfectivo.toFixed(2)}</td>
-                          <td className="py-4 text-right text-green-600 font-medium">{totals.totalBonos > 0 ? `+€${totals.totalBonos.toFixed(2)}` : '-'}</td>
                           <td className="py-4 text-right font-bold text-blue-700 bg-blue-50/30">€{totals.ingresoNetoAdmin.toFixed(2)}</td>
                           <td className="py-4 text-right font-bold text-emerald-700 bg-emerald-50/30">€{totals.gananciaConductor.toFixed(2)}</td>
                           <td className="py-4 text-right text-gray-900 font-black text-lg pr-6">€{totals.totalBruto.toFixed(2)}</td>
@@ -404,7 +435,7 @@ export default function UberStyleDashboard() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                                   
                                   {Object.entries(driver.platforms).map(([platform, data]) => {
-                                    if (data.invoiced === 0 && data.cash === 0 && data.bonuses === 0) return null;
+                                    if (data.invoiced === 0 && data.cash === 0) return null;
                                     
                                     const dotColor = platform === 'uber' ? 'bg-black' : platform === 'cabify' ? 'bg-purple-600' : platform === 'bolt' ? 'bg-green-500' : 'bg-gray-400';
                                     
@@ -423,19 +454,13 @@ export default function UberStyleDashboard() {
                                             <span className="text-gray-500">Cobro Efectivo:</span>
                                             <span className="font-bold text-orange-600">€{data.cash.toFixed(2)}</span>
                                           </div>
-                                          {data.bonuses > 0 && (
-                                            <div className="flex justify-between text-xs">
-                                              <span className="text-gray-500">Bonos:</span>
-                                              <span className="font-bold text-green-600">+€{data.bonuses.toFixed(2)}</span>
-                                            </div>
-                                          )}
                                           <div className="pt-2 mt-2 border-t border-gray-100 flex justify-between text-xs">
                                             <span className="font-bold text-blue-700">Admin (65%):</span>
                                             <span className="font-bold text-blue-700">€{(data.invoiced * 0.65).toFixed(2)}</span>
                                           </div>
                                           <div className="flex justify-between text-xs">
                                             <span className="font-bold text-emerald-700">Flota (35%):</span>
-                                            <span className="font-bold text-emerald-700">€{((data.invoiced * 0.35) + data.bonuses).toFixed(2)}</span>
+                                            <span className="font-bold text-emerald-700">€{(data.invoiced * 0.35).toFixed(2)}</span>
                                           </div>
                                         </div>
                                       </div>
@@ -457,9 +482,6 @@ export default function UberStyleDashboard() {
                     <td className="py-5 text-xs font-bold uppercase tracking-wider">Total Flota</td>
                     <td className="py-5 text-right text-orange-400 font-bold">
                       €{driversData.reduce((acc, driver) => acc + calculateTotals(driver.platforms).totalEfectivo, 0).toFixed(2)}
-                    </td>
-                    <td className="py-5 text-right text-green-400 font-bold">
-                      +€{driversData.reduce((acc, driver) => acc + calculateTotals(driver.platforms).totalBonos, 0).toFixed(2)}
                     </td>
                     <td className="py-5 text-right font-bold text-blue-400 bg-white/5">
                       €{driversData.reduce((acc, driver) => acc + calculateTotals(driver.platforms).ingresoNetoAdmin, 0).toFixed(2)}

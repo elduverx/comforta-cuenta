@@ -8,9 +8,12 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const type = searchParams.get('type');
     
+    const adminParam = searchParams.get('admin');
+    const filterByAdmin = (arr: any[]) => adminParam ? arr.filter((d: any) => (d.admin || '').toLowerCase() === adminParam.toLowerCase()) : arr;
+
     if (type === 'master') {
       const masterDrivers = getMasterDrivers();
-      return NextResponse.json(masterDrivers);
+      return NextResponse.json(filterByAdmin(masterDrivers));
     }
     
     const start = searchParams.get('start');
@@ -18,12 +21,12 @@ export async function GET(request: Request) {
     
     if (start && end) {
       const drivers = getDriversByRange(start, end);
-      return NextResponse.json(drivers);
+      return NextResponse.json(filterByAdmin(drivers));
     }
 
     const weekId = searchParams.get('week') || undefined;
     const drivers = getDrivers(weekId);
-    return NextResponse.json(drivers);
+    return NextResponse.json(filterByAdmin(drivers));
   } catch (error) {
     return NextResponse.json({ error: 'Error fetching drivers' }, { status: 500 });
   }

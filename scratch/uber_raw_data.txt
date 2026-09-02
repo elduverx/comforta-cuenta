@@ -1,5 +1,3 @@
-Install our mobile app!
-Access this website from your phone to install our mobile app and manage your fleet on the go.
 Oscar Alejand...
 Home
 Documents
@@ -34,7 +32,7 @@ Search
 Filter
 Today
 Yesterday
-Aug 24th, 2026 04:00 AM - Aug 31st, 2026 04:00 AM
+Jul 29th, 2026 04:00 AM - Aug 1st, 2026 04:00 AM
 Name
 Total Earnings
 Earnings / hr
@@ -46,59 +44,44 @@ Acceptance
 Cancellation
 Block Cash Trips
 
-JOSE DOMINGO ACOSTA CAICEDO
+GREGORY JOSE MARQUEZ MENDEZ
 
-€1,376.68
-€26.18
-€122.95
-1.50
-52.59
-79
-12.10%
-5.10%
+€851.41
+€30.07
+€33.89
+1.27
+28.31
+36
+14.41%
+0.00%
 Block
 
 SHAUKAT ALI KHAN BIBI
 
-€1,370.45
-€23.98
-€225.21
-1.86
-57.14
-106
-15.75%
-3.08%
+€779.74
+€27.55
+€128.36
+1.77
+28.30
+50
+13.84%
+4.92%
 Block
 
-SANTIAGO FORERO RODRIGUEZ
+JOSE DOMINGO ACOSTA CAICEDO
 
-€1,320.98
-€25.12
-€211.23
-2.81
-52.58
-148
-42.79%
-7.03%
-Block
-
-GREGORY JOSE MARQUEZ MENDEZ
-
-€1,282.78
-€26.74
-€174.86
-1.98
-47.98
-95
-22.63%
-4.35%
+€481.81
+€18.29
+€178.19
+1.33
+26.34
+35
+16.76%
+2.33%
 Block
 10 rows
 ❮❮
 First
 Prev
 Next
-
-Have a question? We'd love to chat with you!
-
 Sincronizando...

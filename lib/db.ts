@@ -117,10 +117,13 @@ export function getDriversByRange(startDate: string, endDate: string) {
     const weekDate = getDateFromWeekId(key);
     if (!weekDate) continue;
     
-    // Check if week starts within the range
-    if (weekDate >= start && weekDate <= end) {
+    const weekEnd = new Date(weekDate);
+    weekEnd.setDate(weekEnd.getDate() + 6);
+    
+    // Check if the week overlaps with the selected range
+    if (weekDate <= end && weekEnd >= start) {
       drivers.forEach((d: any) => {
-        const nameKey = d.name.toLowerCase();
+        const nameKey = d.name.toLowerCase() + '-' + (d.admin || '').toLowerCase();
         if (!mergedDrivers[nameKey]) {
           mergedDrivers[nameKey] = JSON.parse(JSON.stringify(d));
           // Delete week-specific dateRange text for merged rows
@@ -167,7 +170,7 @@ function updateMasterRegistry(driver: any) {
   
   if (!data.master_drivers) data.master_drivers = {};
   
-  const key = driver.name.toLowerCase();
+  const key = driver.name.toLowerCase() + '-' + (driver.admin || '').toLowerCase();
   if (!data.master_drivers[key]) {
     data.master_drivers[key] = {
       id: driver.id,
@@ -202,7 +205,7 @@ export function syncPlatformData(plataforma: string, admin: string, dateRange: s
   
   newDrivers.forEach(nd => {
     let existingDriver = drivers.find((d: any) => 
-      d.name.toLowerCase() === nd.nombre.toLowerCase()
+      d.name.toLowerCase() === nd.nombre.toLowerCase() && (d.admin || '').toLowerCase() === (admin || '').toLowerCase()
     );
     
     if (!existingDriver) {
