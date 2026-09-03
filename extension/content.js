@@ -218,8 +218,8 @@ function createFloatingMenu() {
       const thElements = Array.from(document.querySelectorAll('th, [role="columnheader"], .table-header-cell'));
       if (thElements.length > 0) {
         const nameCol = thElements.findIndex(th => th.textContent.includes('Conductor/a') || th.textContent.includes('Nombre'));
-        const netCol = thElements.findIndex(th => th.textContent.includes('Ingresos netos') && !th.textContent.includes('hora'));
-        const cashCol = thElements.findIndex(th => th.textContent.includes('Efectivo recaudado'));
+        const netCol = thElements.findIndex(th => th.textContent.includes('Ingresos brutos (total)'));
+        const cashCol = thElements.findIndex(th => th.textContent.includes('Ingresos brutos (pagos en efectivo)'));
 
         if (nameCol !== -1 && netCol !== -1 && cashCol !== -1) {
           const rows = document.querySelectorAll('tbody tr, [role="row"], .table-row');
