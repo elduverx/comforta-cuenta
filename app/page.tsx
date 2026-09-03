@@ -166,11 +166,10 @@ export default function UberStyleDashboard() {
   useEffect(() => {
     if (!selectedRange?.from || !selectedRange?.to) return;
     
-    const startStr = selectedRange.from.toISOString();
-    const endStr = selectedRange.to.toISOString();
-
     const fetchDrivers = () => {
-      fetch(`/api/drivers?start=${startStr}&end=${endStr}&admin=${currentProfile}`)
+      const sStr = format(selectedRange.from!, 'yyyy-MM-dd');
+      const eStr = format(selectedRange.to!, 'yyyy-MM-dd');
+      fetch(`/api/drivers?start=${sStr}&end=${eStr}&admin=${currentProfile}`)
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {
