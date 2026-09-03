@@ -5,53 +5,167 @@ function parseEuro(val) {
   return parseFloat(val.replace('€', '').replace(/\./g, '').replace(',', '.'));
 }
 
-function createFloatingMenu() {
-  if (document.getElementById('comforta-extract-btn')) return;
+function showSyncModal(plataforma, drivers, rawText, rawHtml) {
+  // Remover modal previo si existe
+  const existing = document.getElementById('comforta-sync-modal');
+  if (existing) existing.remove();
 
-  const container = document.createElement('div');
-  container.id = 'comforta-extract-btn';
-  Object.assign(container.style, {
-    position: 'fixed', top: '20px', right: '20px', zIndex: '999999',
-    backgroundColor: '#000000', color: '#ffffff',
-    border: '2px solid #ffffff', borderRadius: '12px',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-    fontFamily: 'sans-serif', userSelect: 'none',
-    display: 'flex', flexDirection: 'column', padding: '10px', gap: '8px',
-    cursor: 'move'
+  const overlay = document.createElement('div');
+  overlay.id = 'comforta-sync-modal';
+  Object.assign(overlay.style, {
+    position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.5)', zIndex: '1000000',
+    display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif'
   });
 
-  const title = document.createElement('div');
-  title.innerText = 'Comforta Sync';
-  title.style.fontWeight = 'bold';
-  title.style.fontSize = '12px';
-  title.style.textAlign = 'center';
+  const modal = document.createElement('div');
+  Object.assign(modal.style, {
+    backgroundColor: 'white', padding: '24px', borderRadius: '12px',
+    width: '400px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', color: '#333'
+  });
 
-  const select = document.createElement('select');
-  select.innerHTML = `<option value="Oscar">Admin: Oscar</option><option value="Eglee">Admin: Eglee</option>`;
+  const title = document.createElement('h2');
+  title.innerText = `Sincronizar ${drivers.length} conductores (${plataforma.toUpperCase()})`;
+  Object.assign(title.style, { margin: '0 0 16px 0', fontSize: '18px' });
+
+  // Perfil Admin
+  const adminLabel = document.createElement('label');
+  adminLabel.innerText = 'Perfil (Cuenta):';
+  Object.assign(adminLabel.style, { display: 'block', fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' });
+  
+  const adminSelect = document.createElement('select');
+  adminSelect.innerHTML = `<option value="Oscar">Oscar</option><option value="Eglee">Eglee</option>`;
   const savedAdmin = localStorage.getItem('comforta_admin_name');
-  if (savedAdmin) select.value = savedAdmin;
-  select.onchange = (e) => localStorage.setItem('comforta_admin_name', e.target.value);
-  Object.assign(select.style, {
-    padding: '4px', borderRadius: '4px', border: 'none', 
-    backgroundColor: '#333', color: 'white', fontSize: '12px', cursor: 'pointer'
-  });
+  if (savedAdmin) adminSelect.value = savedAdmin;
+  Object.assign(adminSelect.style, { width: '100%', padding: '8px', marginBottom: '16px', borderRadius: '6px', border: '1px solid #ccc' });
+
+  // Fecha Inicio
+  const startLabel = document.createElement('label');
+  startLabel.innerText = 'Fecha de Inicio del Reporte:';
+  Object.assign(startLabel.style, { display: 'block', fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' });
+  const startDate = document.createElement('input');
+  startDate.type = 'date';
+  Object.assign(startDate.style, { width: '100%', padding: '8px', marginBottom: '16px', borderRadius: '6px', border: '1px solid #ccc' });
+
+  // Fecha Fin
+  const endLabel = document.createElement('label');
+  endLabel.innerText = 'Fecha de Fin del Reporte:';
+  Object.assign(endLabel.style, { display: 'block', fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' });
+  const endDate = document.createElement('input');
+  endDate.type = 'date';
+  Object.assign(endDate.style, { width: '100%', padding: '8px', marginBottom: '24px', borderRadius: '6px', border: '1px solid #ccc' });
+
+  // Sugerir fechas basadas en hoy por defecto (el usuario las puede cambiar)
+  const today = new Date();
+  const dStr = today.toISOString().split('T')[0];
+  startDate.value = dStr;
+  endDate.value = dStr;
+
+  // Botones
+  const btnContainer = document.createElement('div');
+  Object.assign(btnContainer.style, { display: 'flex', justifyContent: 'flex-end', gap: '12px' });
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.innerText = 'Cancelar';
+  Object.assign(cancelBtn.style, { padding: '8px 16px', border: 'none', background: '#eee', borderRadius: '6px', cursor: 'pointer' });
+  cancelBtn.onclick = () => overlay.remove();
 
   const syncBtn = document.createElement('button');
-  syncBtn.innerText = '⚡ Sincronizar Datos';
-  Object.assign(syncBtn.style, {
-    padding: '8px 12px', backgroundColor: '#4CAF50', color: '#ffffff',
-    border: 'none', borderRadius: '6px', fontWeight: 'bold',
-    cursor: 'pointer', fontSize: '12px'
-  });
+  syncBtn.innerText = 'Confirmar y Enviar';
+  Object.assign(syncBtn.style, { padding: '8px 16px', border: 'none', background: '#000', color: '#fff', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' });
+  
+  syncBtn.onclick = async () => {
+    const sDate = startDate.value;
+    const eDate = endDate.value;
+    const admin = adminSelect.value;
+    if (!sDate || !eDate) {
+      alert("Debes seleccionar fecha de inicio y fin.");
+      return;
+    }
+    
+    if (sDate > eDate) {
+      alert("La fecha de inicio no puede ser mayor que la fecha de fin.");
+      return;
+    }
 
+    localStorage.setItem('comforta_admin_name', admin);
+    syncBtn.innerText = 'Enviando...';
+    syncBtn.disabled = true;
+
+    const payload = {
+      plataforma: plataforma,
+      url: window.location.href,
+      admin: admin,
+      startDate: sDate,
+      endDate: eDate,
+      data: drivers,
+      rawText: rawText,
+      rawHtml: rawHtml,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      
+      if(response.ok) {
+        alert(`¡Éxito! Se sincronizaron ${drivers.length} conductores de ${plataforma}.`);
+        overlay.remove();
+      } else {
+        alert('Error al enviar datos.');
+        syncBtn.innerText = 'Reintentar';
+        syncBtn.disabled = false;
+      }
+    } catch(e) {
+      alert('Error de red: ' + e.message);
+      syncBtn.innerText = 'Reintentar';
+      syncBtn.disabled = false;
+    }
+  };
+
+  btnContainer.appendChild(cancelBtn);
+  btnContainer.appendChild(syncBtn);
+
+  modal.appendChild(title);
+  modal.appendChild(adminLabel);
+  modal.appendChild(adminSelect);
+  modal.appendChild(startLabel);
+  modal.appendChild(startDate);
+  modal.appendChild(endLabel);
+  modal.appendChild(endDate);
+  modal.appendChild(btnContainer);
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
+function createFloatingButton() {
+  if (document.getElementById('comforta-extract-btn')) return;
+
+  const btn = document.createElement('button');
+  btn.id = 'comforta-extract-btn';
+  btn.innerText = '⚡ Sincronizar con Comforta';
+  
+  Object.assign(btn.style, {
+    position: 'fixed', top: '20px', right: '20px', zIndex: '999999',
+    padding: '12px 24px', backgroundColor: '#000000', color: '#ffffff',
+    border: '2px solid #ffffff', borderRadius: '50px', fontWeight: 'bold',
+    cursor: 'move', boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+    fontFamily: 'sans-serif', userSelect: 'none'
+  });
+  
+  let isDragging = false;
   let dragStarted = false;
-  container.onmousedown = function(event) {
-    if (event.target === select || event.target === syncBtn) return;
+
+  btn.onmousedown = function(event) {
     let startX = event.clientX;
     let startY = event.clientY;
     dragStarted = false;
-    let shiftX = event.clientX - container.getBoundingClientRect().left;
-    let shiftY = event.clientY - container.getBoundingClientRect().top;
+    let shiftX = event.clientX - btn.getBoundingClientRect().left;
+    let shiftY = event.clientY - btn.getBoundingClientRect().top;
 
     function onMouseMove(event) {
       let dx = event.clientX - startX;
@@ -60,9 +174,9 @@ function createFloatingMenu() {
         dragStarted = true;
       }
       if (dragStarted) {
-        container.style.right = 'auto';
-        container.style.left = event.pageX - shiftX + 'px';
-        container.style.top = event.pageY - shiftY + 'px';
+        btn.style.right = 'auto';
+        btn.style.left = event.pageX - shiftX + 'px';
+        btn.style.top = event.pageY - shiftY + 'px';
       }
     }
 
@@ -73,16 +187,13 @@ function createFloatingMenu() {
     };
   };
 
-  container.ondragstart = function() { return false; };
-
-  syncBtn.onclick = async (e) => {
-    if (dragStarted) return;
-    
-    const admin = select.value;
-    localStorage.setItem('comforta_admin_name', admin);
-
-    syncBtn.innerText = 'Sincronizando...';
-    syncBtn.style.backgroundColor = '#666';
+  btn.ondragstart = function() { return false; };
+  
+  btn.onclick = async (e) => {
+    if (dragStarted) {
+      e.preventDefault();
+      return;
+    }
 
     const url = window.location.href;
     let plataforma = 'desconocida';
@@ -95,41 +206,6 @@ function createFloatingMenu() {
     const lines = pageText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
     
     let drivers = [];
-    let rawDateRange = "";
-
-    // Extract Date Text from Screen
-    const allText = lines.join(' ');
-    if (plataforma === 'cabify') {
-       const match = allText.match(/\d{2}\/\d{2}\/\d{4}.*?a.*?\d{2}\/\d{2}\/\d{4}/i);
-       if (match) rawDateRange = match[0];
-       else {
-         const sMatch = allText.match(/\(S\d+\)/);
-         if (sMatch) rawDateRange = sMatch[0];
-       }
-    } else if (plataforma === 'bolt') {
-       const match = allText.match(/\d{1,2}\s+[a-z]{3}\s+-\s+\d{1,2}\s+[a-z]{3}/i);
-       if (match) rawDateRange = match[0];
-    } else if (plataforma === 'uber') {
-       // Uber date extraction could be specific
-       // Often looks like "Aug 10 - Aug 16" or "10 ago - 16 ago"
-       const match = allText.match(/\d{1,2}\s+[a-z]{3}\s*-\s*\d{1,2}\s+[a-z]{3}/i);
-       if (match) rawDateRange = match[0];
-       else {
-         // Maybe full month name
-         const m2 = allText.match(/\b(?:ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)[a-z]* \d{1,2} - \b(?:ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)[a-z]* \d{1,2}/i);
-         if (m2) rawDateRange = m2[0];
-       }
-    }
-
-    if (!rawDateRange) {
-      // Fallback
-      rawDateRange = prompt("No pude detectar la fecha en la pantalla. Ingresa la fecha (ej: 01/08/2026 - 31/08/2026):", "01/08/2026 - 31/08/2026");
-      if (!rawDateRange) {
-         syncBtn.innerText = '⚡ Sincronizar Datos';
-         syncBtn.style.backgroundColor = '#4CAF50';
-         return;
-      }
-    }
     
     if (plataforma === 'uber') {
       const startIndex = lines.findIndex(l => l === 'Block Cash Trips' || l === 'Bloquear viajes en efectivo');
@@ -303,56 +379,18 @@ function createFloatingMenu() {
 
     if (drivers.length === 0) {
       alert("No se encontraron conductores en la pantalla actual.");
-      syncBtn.innerText = '⚡ Sincronizar Datos';
-      syncBtn.style.backgroundColor = '#4CAF50';
       return;
     }
 
-    const payload = {
-      plataforma: plataforma,
-      url: window.location.href,
-      admin: admin,
-      rawDateRange: rawDateRange,
-      data: drivers,
-      rawText: rawText,
-      timestamp: new Date().toISOString()
-    };
-
-    try {
-      const response = await fetch('http://localhost:3000/api/sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      
-      if(response.ok) {
-        syncBtn.innerText = '¡Sincronizado!';
-        syncBtn.style.backgroundColor = '#2196F3';
-        setTimeout(() => {
-          syncBtn.innerText = '⚡ Sincronizar Datos';
-          syncBtn.style.backgroundColor = '#4CAF50';
-        }, 3000);
-      } else {
-        alert('Error al enviar datos.');
-        syncBtn.innerText = 'Reintentar';
-        syncBtn.style.backgroundColor = '#f44336';
-      }
-    } catch(e) {
-      alert('Error de red: ' + e.message);
-      syncBtn.innerText = 'Reintentar';
-      syncBtn.style.backgroundColor = '#f44336';
-    }
+    showSyncModal(plataforma, drivers, pageText, pageHtml);
   };
 
-  container.appendChild(title);
-  container.appendChild(select);
-  container.appendChild(syncBtn);
-  document.body.appendChild(container);
+  document.body.appendChild(btn);
 }
 
 if (document.body) {
-  createFloatingMenu();
+  createFloatingButton();
 } else {
-  document.addEventListener('DOMContentLoaded', createFloatingMenu);
+  document.addEventListener('DOMContentLoaded', createFloatingButton);
 }
-setInterval(createFloatingMenu, 2000);
+setInterval(createFloatingButton, 2000);
