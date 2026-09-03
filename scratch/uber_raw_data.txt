@@ -32,7 +32,7 @@ Search
 Filter
 Today
 Yesterday
-Aug 31st, 2026 12:00 AM - Sep 4th, 2026 12:00 AM
+Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM
 Name
 Total Earnings
 Earnings / hr
@@ -47,10 +47,10 @@ Block Cash Trips
 GREGORY JOSE MARQUEZ MENDEZ
 
 €706.53
-€26.04
+€26.02
 €115.77
 1.84
-27.14
+27.15
 50
 20.88%
 0.00%
@@ -96,7 +96,4 @@ Block
 First
 Prev
 Next
-Comforta Sync
-Admin: Oscar
-Admin: Eglee
 Sincronizando...

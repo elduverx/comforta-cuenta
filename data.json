@@ -109,6 +109,60 @@
           "cobradoABordo": null
         }
       ]
+    },
+    {
+      "id": "uber_Oscar_2026-08-31_2026-09-06",
+      "platform": "uber",
+      "admin": "Oscar",
+      "startDate": "2026-08-31",
+      "endDate": "2026-09-06",
+      "timestamp": "2026-09-03T11:27:32.744Z",
+      "drivers": [
+        {
+          "id": "gregoryjosemarquezmendez",
+          "name": "GREGORY JOSE MARQUEZ MENDEZ",
+          "initials": "GJ",
+          "photoUrl": "/avatars/uber_gregory_jose_marquez_mendez.jpg",
+          "admin": "Oscar",
+          "invoiced": 706.53,
+          "cash": 115.77,
+          "bonuses": 26.02,
+          "cobradoABordo": null
+        },
+        {
+          "id": "josedomingoacostacaicedo",
+          "name": "JOSE DOMINGO ACOSTA CAICEDO",
+          "initials": "JD",
+          "photoUrl": "/avatars/uber_jose_domingo_acosta_caicedo.jpg",
+          "admin": "Oscar",
+          "invoiced": 686.67,
+          "cash": 85.52,
+          "bonuses": 28.32,
+          "cobradoABordo": null
+        },
+        {
+          "id": "santiagoforerorodriguez",
+          "name": "SANTIAGO FORERO RODRIGUEZ",
+          "initials": "SF",
+          "photoUrl": "/avatars/uber_santiago_forero_rodriguez.jpg",
+          "admin": "Oscar",
+          "invoiced": 604.19,
+          "cash": 171.24,
+          "bonuses": 20.43,
+          "cobradoABordo": null
+        },
+        {
+          "id": "shaukatalikhanbibi",
+          "name": "SHAUKAT ALI KHAN BIBI",
+          "initials": "SA",
+          "photoUrl": "/avatars/uber_shaukat_ali_khan_bibi.jpg",
+          "admin": "Oscar",
+          "invoiced": 400.68,
+          "cash": 126.43,
+          "bonuses": 23.24,
+          "cobradoABordo": null
+        }
+      ]
     }
   ]
 }

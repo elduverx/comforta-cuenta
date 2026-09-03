@@ -16,48 +16,11 @@ function createFloatingMenu() {
     position: 'fixed', top: '20px', right: '20px', zIndex: '999999',
     padding: '12px 24px', backgroundColor: '#000000', color: '#ffffff',
     border: '2px solid #ffffff', borderRadius: '50px', fontWeight: 'bold',
-    cursor: 'move', boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+    cursor: 'pointer', boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
     fontFamily: 'sans-serif', userSelect: 'none'
   });
   
-  let isDragging = false;
-  let dragStarted = false;
-
-  btn.onmousedown = function(event) {
-    let startX = event.clientX;
-    let startY = event.clientY;
-    dragStarted = false;
-    let shiftX = event.clientX - btn.getBoundingClientRect().left;
-    let shiftY = event.clientY - btn.getBoundingClientRect().top;
-
-    function onMouseMove(event) {
-      let dx = event.clientX - startX;
-      let dy = event.clientY - startY;
-      if (!dragStarted && Math.sqrt(dx*dx + dy*dy) > 5) {
-        dragStarted = true;
-      }
-      if (dragStarted) {
-        btn.style.right = 'auto';
-        btn.style.left = event.pageX - shiftX + 'px';
-        btn.style.top = event.pageY - shiftY + 'px';
-      }
-    }
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.onmouseup = function() {
-      document.removeEventListener('mousemove', onMouseMove);
-      document.onmouseup = null;
-    };
-  };
-
-  btn.ondragstart = function() { return false; };
-  
   btn.onclick = async (e) => {
-    if (dragStarted) {
-      e.preventDefault();
-      return;
-    }
-    
     let admin = localStorage.getItem('comforta_admin_name');
     if (!admin) {
       admin = prompt("Ingresa el nombre de la cuenta (Oscar o Eglee):", "Oscar");
