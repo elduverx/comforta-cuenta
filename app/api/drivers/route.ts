@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDrivers, getMasterDrivers, getDriversByRange } from '@/lib/db';
+import { getMasterDrivers, getDriversByRange } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,9 +24,7 @@ export async function GET(request: Request) {
       return NextResponse.json(filterByAdmin(drivers));
     }
 
-    const weekId = searchParams.get('week') || undefined;
-    const drivers = getDrivers(weekId);
-    return NextResponse.json(filterByAdmin(drivers));
+    return NextResponse.json([]);
   } catch (error) {
     return NextResponse.json({ error: 'Error fetching drivers' }, { status: 500 });
   }

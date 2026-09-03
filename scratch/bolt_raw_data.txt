@@ -9,25 +9,25 @@ Ingresos por conductor
 Resumen de los ingresos de la empresa y de los conductores. Los ingresos se registran cuando la tarifa es final, no cuando se hace el viaje. Las revisiones de precios, los ajustes o las propinas pueden cambiar cuando la tarifa es final. Para más información sobre términos y lo que significan, accede a nuestro glosario.
 Personalizado
 Ingresos brutos (total)
-2025,6
+2563,8
 €
 Total tasas
-472,34
+610,89
 €
 Ingresos netos
-1553,26
+1952,91
 €
 Ingresos de campañas de flotas
-120,25
+110,25
 €
 Reembolsos de gastos de la flota
 0
 €
 Ingresos brutos por hora
-35,02
+31,28
 €/h
 Ingresos netos por hora
-26,86
+23,83
 €/h
 Descargar
 Conductor/a
@@ -61,76 +61,83 @@ Descuento en la comisión (efectivo)
 
 Gregory Jose Marquez Mendez
 	
-51,25
+281,3
 €
 	
-—
-IVA:
-—
-	
-51,25
+28,1
 €
 IVA:
-4,2
+2,2
 €
 	
-46,15
+253,2
+€
+IVA:
+22,22
 €
 	
-—
+244,35
+€
 	
-—
-IVA:
-—
-	
-—
-IVA:
 —
 	
 —
 IVA:
 —
 	
-38,44
+—
+IVA:
+—
+	
+—
+IVA:
+—
+	
+210,98
 €
 	
-34,19
+40,52
 €/h
 	
-25,64
+30,39
 €/h
 	
-—
+4,0
+€
 	
-5,1
+8,85
 €
 
 
 Orluis Rafael Salazar Linares
 	
-1783,4
+1039,4
 €
 	
-1115,65
+656,7
 €
 IVA:
-79,83
+51,2
 €
 	
-517,5
+266,45
 €
 IVA:
-33,38
+18,63
 €
 	
-367,05
+204,9
 €
 	
-16,0
+6,0
 €
 	
-120,25
+110,25
 €
+IVA:
+—
+	
+—
 IVA:
 —
 	
@@ -138,76 +145,117 @@ IVA:
 IVA:
 —
 	
-14,0
-€
-IVA:
-1,28
+808,61
 €
 	
-1371,61
-€
-	
-36,27
+35,58
 €/h
 	
-27,9
+27,68
 €/h
 	
-237,8
+93,4
 €
 	
-150,45
+61,55
 €
+
+
+Santiago Forero Rodriguez
+	
+10,7
+€
+	
+—
+IVA:
+—
+	
+10,7
+€
+IVA:
+0,97
+€
+	
+10,7
+€
+	
+—
+	
+—
+IVA:
+—
+	
+—
+IVA:
+—
+	
+—
+IVA:
+—
+	
+8,03
+€
+	
+12,56
+€/h
+	
+9,42
+€/h
+	
+—
+	
+—
 
 
 Shaukat Ali Khan Bibi
 	
-190,95
+1232,4
 €
 	
-116,6
+634,65
 €
 IVA:
-8,32
+48,09
 €
 	
-67,35
+581,5
 €
 IVA:
-4,5
+42,49
 €
 	
-49,4
+467,4
 €
 	
-—
-	
-—
-IVA:
-—
+4,0
+€
 	
 —
 IVA:
 —
 	
-7,0
+—
+IVA:
+—
+	
+12,25
 €
 IVA:
-0,64
+1,11
 €
 	
-143,21
+925,3
 €
 	
-26,74
+27,44
 €/h
 	
-20,06
+20,6
 €/h
 	
-25,15
+105,4
 €
 	
-17,95
+114,1
 €
 Sincronizando...

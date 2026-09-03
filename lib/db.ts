@@ -1,87 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 
-const DB_PATH = path.join(process.cwd(), 'data.json');
-
-const defaultData = [
-  { 
-    id: "d1", 
-    name: "EDWARD FERNANDO ASTAIZA GARCIA", 
-    initials: "EF",
-    platforms: {
-      uber: { invoiced: 479.46, cash: 47.43, bonuses: 0 },
-      cabify: { invoiced: 290.48, cash: 56.86, bonuses: 0 },
-      bolt: { invoiced: 172.95, cash: 16.85, bonuses: 0 },
-      privados: { invoiced: 0, cash: 0, bonuses: 0 }
-    }
-  }
-];
-
-function parseWeekId(dateString: string): string {
-  if (!dateString) return "UNKNOWN";
-
-  // Try Cabify Individual: "(S35)"
-  let matchCabifyS = dateString.match(/\(S(\d+)\)/i);
-  if (matchCabifyS) {
-    const weekNo = matchCabifyS[1].padStart(2, '0');
-    return `${new Date().getUTCFullYear()}-W${weekNo}`;
-  }
-
-  // Try Cabify: "10/08/2026 a 16/08/2026"
-  let match = dateString.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-  if (match) {
-    const [_, d, m, y] = match;
-    const date = new Date(`${y}-${m}-${d}T00:00:00Z`);
-    return getWeekId(date);
-  }
-  
-  // Try Uber: "Aug 10th, 2026 04:00 AM"
-  const months: Record<string, string> = {Jan:'01',Feb:'02',Mar:'03',Apr:'04',May:'05',Jun:'06',Jul:'07',Aug:'08',Sep:'09',Oct:'10',Nov:'11',Dec:'12'};
-  for (const [name, num] of Object.entries(months)) {
-    if (dateString.includes(name)) {
-      let dayMatch = dateString.match(new RegExp(`${name} (\\d{1,2})`));
-      let yearMatch = dateString.match(/20\d{2}/);
-      if (dayMatch && yearMatch) {
-        let d = dayMatch[1].padStart(2, '0');
-        let y = yearMatch[0];
-        const date = new Date(`${y}-${num}-${d}T00:00:00Z`);
-        return getWeekId(date);
-      }
-    }
-  }
-
-  // Try Bolt: "3 ago - 31 ago"
-  const mesesES: Record<string, string> = {ene:'01',feb:'02',mar:'03',abr:'04',may:'05',jun:'06',jul:'07',ago:'08',sep:'09',oct:'10',nov:'11',dic:'12'};
-  const matchBolt = dateString.toLowerCase().match(/(\d{1,2})\s+([a-z]{3})/);
-  if (matchBolt) {
-     const d = matchBolt[1].padStart(2, '0');
-     const num = mesesES[matchBolt[2]];
-     if (num) {
-        const y = new Date().getUTCFullYear();
-        const date = new Date(`${y}-${num}-${d}T00:00:00Z`);
-        return getWeekId(date);
-     }
-  }
-
-  return "UNKNOWN";
-}
-
 function getWeekId(date: Date): string {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   const dayNum = d.getUTCDay() || 7;
   d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-  const weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1)/7);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
   return `${d.getUTCFullYear()}-W${weekNo.toString().padStart(2, '0')}`;
-}
-
-export function getDrivers(weekId?: string) {
-  if (!fs.existsSync(DB_PATH)) return [];
-  const data = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-  
-  if (Array.isArray(data)) return data;
-  if (weekId && data[weekId]) return data[weekId];
-  return [];
 }
 
 function getDateFromWeekId(weekId: string): Date | null {
@@ -89,83 +15,243 @@ function getDateFromWeekId(weekId: string): Date | null {
   if (!match) return null;
   const year = parseInt(match[1]);
   const week = parseInt(match[2]);
-  
   const simple = new Date(Date.UTC(year, 0, 1 + (week - 1) * 7));
   const dow = simple.getUTCDay();
   const ISOweekStart = simple;
-  if (dow <= 4)
-      ISOweekStart.setUTCDate(simple.getUTCDate() - simple.getUTCDay() + 1);
-  else
-      ISOweekStart.setUTCDate(simple.getUTCDate() + 8 - simple.getUTCDay());
+  if (dow <= 4) {
+    ISOweekStart.setDate(simple.getDate() - simple.getUTCDay() + 1);
+  } else {
+    ISOweekStart.setDate(simple.getDate() + 8 - simple.getUTCDay());
+  }
   return ISOweekStart;
 }
 
-export function getDriversByRange(startDate: string, endDate: string) {
-  if (!fs.existsSync(DB_PATH)) return [];
-  const data = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-  
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  start.setHours(0,0,0,0);
-  end.setHours(23,59,59,999);
-  
-  const mergedDrivers: Record<string, any> = {};
 
-  for (const [key, drivers] of Object.entries(data)) {
-    if (key === 'master_drivers' || !Array.isArray(drivers)) continue;
+const DB_PATH = path.join(process.cwd(), 'data.json');
+
+// Get dates between start and end (inclusive)
+function getDatesInRange(startStr: string, endStr: string): string[] {
+  const dates = [];
+  let current = new Date(startStr);
+  const end = new Date(endStr);
+  while (current <= end) {
+    dates.push(current.toISOString().split('T')[0]);
+    current.setUTCDate(current.getUTCDate() + 1);
+  }
+  return dates;
+}
+
+export function getDriversByRange(startStr: string, endStr: string) {
+  if (!fs.existsSync(DB_PATH)) return [];
+  const raw = fs.readFileSync(DB_PATH, 'utf-8');
+  let data;
+  try { data = JSON.parse(raw); } catch { return []; }
+
+  let needsSave = false;
+  if (!data.syncs) {
+     data.syncs = [];
+     needsSave = true;
+  }
+  
+  // Always check for old week keys and migrate them permanently
+  for (const key of Object.keys(data)) {
+    if (key === 'master_drivers' || key === 'syncs') continue;
+    if (!Array.isArray(data[key])) continue;
     
     const weekDate = getDateFromWeekId(key);
     if (!weekDate) continue;
-    
     const weekEnd = new Date(weekDate);
-    weekEnd.setDate(weekEnd.getDate() + 6);
+    weekEnd.setUTCDate(weekEnd.getUTCDate() + 6);
     
-    // Check if the week overlaps with the selected range
-    if (weekDate <= end && weekEnd >= start) {
-      drivers.forEach((d: any) => {
+    for (const plat of ['uber', 'cabify', 'bolt', 'privados']) {
+       const platDrivers = data[key].filter((d: any) => d.platforms[plat] && (d.platforms[plat].invoiced > 0 || d.platforms[plat].cash > 0));
+       if (platDrivers.length > 0) {
+          data.syncs.push({
+             id: `${plat}_migrated_${key}`,
+             platform: plat,
+             admin: 'Oscar', // Assume Oscar for migrated data if unknown
+             startDate: weekDate.toISOString().split('T')[0],
+             endDate: weekEnd.toISOString().split('T')[0],
+             timestamp: new Date().toISOString(),
+             drivers: platDrivers.map((d: any) => ({
+                id: d.id, name: d.name, initials: d.initials, photoUrl: d.photoUrl, admin: d.admin,
+                invoiced: d.platforms[plat].invoiced,
+                cash: d.platforms[plat].cash,
+                bonuses: d.platforms[plat].bonuses,
+                cobradoABordo: d.platforms[plat].cobradoABordo
+             }))
+          });
+       }
+    }
+    // Delete the old key so we don't migrate it again
+    delete data[key];
+    needsSave = true;
+  }
+
+  if (needsSave) {
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  }
+
+  const start = new Date(startStr).toISOString().split('T')[0];
+  const end = new Date(endStr).toISOString().split('T')[0];
+  const targetDays = new Set(getDatesInRange(start, end));
+
+  // Find overlapping syncs
+  const validSyncs = data.syncs.filter((s: any) => {
+    return s.startDate <= end && s.endDate >= start;
+  });
+
+  // Hierarchical Deduplication per platform + admin
+  // For a specific platform+admin, we sort syncs by duration descending.
+  // We track which days have been covered.
+  
+  const deduplicatedSyncs = [];
+  const groupedSyncs: Record<string, any[]> = {};
+  
+  for (const s of validSyncs) {
+     const groupKey = `${s.platform}_${s.admin}`;
+     if (!groupedSyncs[groupKey]) groupedSyncs[groupKey] = [];
+     groupedSyncs[groupKey].push(s);
+  }
+
+  for (const groupKey of Object.keys(groupedSyncs)) {
+     const syncs = groupedSyncs[groupKey];
+     // Sort by duration descending
+     syncs.sort((a, b) => {
+        const aLen = getDatesInRange(a.startDate, a.endDate).length;
+        const bLen = getDatesInRange(b.startDate, b.endDate).length;
+        return bLen - aLen;
+     });
+
+     const coveredDays = new Set<string>();
+     for (const s of syncs) {
+        const sDays = getDatesInRange(s.startDate, s.endDate);
+        // Check if ANY day of this sync is already covered
+        const isCovered = sDays.some(d => coveredDays.has(d));
+        if (!isCovered) {
+           deduplicatedSyncs.push(s);
+           sDays.forEach(d => coveredDays.add(d));
+        }
+     }
+  }
+
+  // Now we merge the deduplicated syncs into the old structure format for the UI
+  const mergedDrivers: Record<string, any> = {};
+
+  for (const s of deduplicatedSyncs) {
+     // Prorate? No, we don't prorate. The user wants the exact sync amounts.
+     for (const d of s.drivers) {
         const nameKey = d.name.toLowerCase() + '-' + (d.admin || '').toLowerCase();
         if (!mergedDrivers[nameKey]) {
-          mergedDrivers[nameKey] = JSON.parse(JSON.stringify(d));
-          // Delete week-specific dateRange text for merged rows
-          mergedDrivers[nameKey].dateRange = `Rango seleccionado`;
-        } else {
-          // Merge platforms
-          const p = mergedDrivers[nameKey].platforms;
-          for (const plat of ['uber', 'cabify', 'bolt', 'privados']) {
-            if (!p[plat]) p[plat] = { invoiced: 0, cash: 0, bonuses: 0 };
-            if (d.platforms[plat]) {
-              p[plat].invoiced += d.platforms[plat].invoiced || 0;
-              p[plat].cash += d.platforms[plat].cash || 0;
-              p[plat].bonuses += d.platforms[plat].bonuses || 0;
-            }
-          }
+           mergedDrivers[nameKey] = {
+              id: d.id, name: d.name, initials: d.initials, photoUrl: d.photoUrl,
+              admin: d.admin, dateRange: 'Rango seleccionado',
+              platforms: {
+                 uber: { invoiced: 0, cash: 0, bonuses: 0, cobradoABordo: 0 },
+                 cabify: { invoiced: 0, cash: 0, bonuses: 0, cobradoABordo: 0 },
+                 bolt: { invoiced: 0, cash: 0, bonuses: 0, cobradoABordo: 0 },
+                 privados: { invoiced: 0, cash: 0, bonuses: 0, cobradoABordo: 0 }
+              }
+           };
         }
-      });
-    }
+        
+        // Accumulate
+        const p = mergedDrivers[nameKey].platforms[s.platform];
+        if (p) {
+           p.invoiced += d.invoiced || 0;
+           p.cash += d.cash || 0;
+           p.bonuses += d.bonuses || 0;
+           p.cobradoABordo += d.cobradoABordo || 0;
+        }
+        if (d.photoUrl) {
+           mergedDrivers[nameKey].photoUrl = d.photoUrl;
+        }
+     }
   }
-  
+
   return Object.values(mergedDrivers);
 }
 
-function saveDrivers(drivers: any[], weekId?: string) {
+export function syncPlatformData(dataPayload: any) {
   let data: any = {};
   if (fs.existsSync(DB_PATH)) {
-    const raw = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-    if (!Array.isArray(raw)) data = raw;
+    try {
+      data = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
+    } catch {}
   }
   
-  if (weekId) {
-    data[weekId] = drivers;
+  if (!data.syncs) {
+    data.syncs = [];
   }
+
+  const { plataforma, admin, startDate, endDate, data: newDrivers } = dataPayload;
   
+  const id = `${plataforma}_${admin}_${startDate}_${endDate}`;
+  
+  const syncDrivers = newDrivers.map((nd: any) => {
+    // Generar ID
+    let driverId = nd.nombre.toLowerCase().replace(/[^a-z0-9]/g, '');
+    let initials = nd.nombre.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase();
+    
+    // update master registry
+    updateMasterRegistry({
+       id: driverId,
+       name: nd.nombre,
+       initials: initials,
+       photoUrl: nd.photoUrl || null,
+       admin: admin
+    });
+
+    return {
+       id: driverId,
+       name: nd.nombre,
+       initials: initials,
+       photoUrl: nd.photoUrl || null,
+       admin: admin,
+       invoiced: nd.totalBruto,
+       cash: nd.totalEfectivo,
+       bonuses: nd.bonos,
+       cobradoABordo: nd.cobradoABordo === null ? null : (nd.cobradoABordo || 0)
+    };
+  });
+
+  // Find if this exact sync exists
+  const existingIndex = data.syncs.findIndex((s: any) => s.id === id);
+  const newSync = {
+    id, platform: plataforma, admin, startDate, endDate, timestamp: new Date().toISOString(),
+    drivers: syncDrivers
+  };
+
+  if (existingIndex !== -1) {
+    // If it exists, but someone syncs cabify global (cobradoABordo = null) and we already have values, preserve them!
+    const existingSync = data.syncs[existingIndex];
+    for (const nd of newSync.drivers) {
+       if (nd.cobradoABordo === null) {
+          const oldDriver = existingSync.drivers.find((d: any) => d.id === nd.id);
+          nd.cobradoABordo = oldDriver ? oldDriver.cobradoABordo : null;
+       }
+       if (!nd.photoUrl) {
+          const oldDriver = existingSync.drivers.find((d: any) => d.id === nd.id);
+          if (oldDriver && oldDriver.photoUrl) nd.photoUrl = oldDriver.photoUrl;
+       }
+    }
+    data.syncs[existingIndex] = newSync;
+  } else {
+    data.syncs.push(newSync);
+  }
+
+  // Remove fully contained smaller syncs (e.g. if we sync Week, delete Days)
+  // Or do we keep them and let deduplication handle it?
+  // Let deduplication handle it on read! But wait, if they sync Day 1, Day 2, and then Week, deduplication will ignore Day 1 and Day 2 perfectly!
+  // Keeping them is safer for auditing. We don't need to delete them.
+
   fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
 }
 
 function updateMasterRegistry(driver: any) {
   let data: any = {};
   if (fs.existsSync(DB_PATH)) {
-    const raw = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-    if (!Array.isArray(raw)) data = raw;
+    try { data = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8')); } catch {}
   }
   
   if (!data.master_drivers) data.master_drivers = {};
@@ -192,55 +278,34 @@ export function getMasterDrivers() {
   if (!fs.existsSync(DB_PATH)) return [];
   const data = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
   if (data.master_drivers) {
-    return Object.values(data.master_drivers);
+    return Object.values(data.master_drivers).sort((a: any, b: any) => a.name.localeCompare(b.name));
   }
   return [];
 }
 
-export function syncPlatformData(plataforma: string, admin: string, dateRange: string, newDrivers: any[]) {
-  const weekId = parseWeekId(dateRange);
-  console.log(`Syncing data for week: ${weekId}`);
+export function clearDatabase(adminParam?: string) {
+  if (!fs.existsSync(DB_PATH)) return;
+  const data = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
   
-  const drivers = getDrivers(weekId);
-  
-  newDrivers.forEach(nd => {
-    let existingDriver = drivers.find((d: any) => 
-      d.name.toLowerCase() === nd.nombre.toLowerCase() && (d.admin || '').toLowerCase() === (admin || '').toLowerCase()
-    );
-    
-    if (!existingDriver) {
-      existingDriver = {
-        id: "d" + Date.now() + Math.floor(Math.random()*100),
-        name: nd.nombre,
-        initials: nd.nombre.split(' ').map((n:string)=>n[0]).join('').substring(0,2),
-        admin: admin,
-        dateRange: dateRange,
-        photoUrl: nd.photoUrl || null,
-        platforms: {
-          uber: { invoiced: 0, cash: 0, bonuses: 0 },
-          cabify: { invoiced: 0, cash: 0, bonuses: 0 },
-          bolt: { invoiced: 0, cash: 0, bonuses: 0 },
-          privados: { invoiced: 0, cash: 0, bonuses: 0 }
-        }
-      };
-      drivers.push(existingDriver);
+  if (adminParam) {
+    if (data.syncs) {
+       data.syncs = data.syncs.filter((s: any) => (s.admin || '').toLowerCase() !== adminParam.toLowerCase());
     }
     
-    // Update data for the specific platform
-    existingDriver.platforms[plataforma] = {
-      invoiced: nd.totalBruto,
-      cash: nd.totalEfectivo,
-      bonuses: nd.bonos
-    };
-
-    // Keep the photo updated if we found a new one
-    if (nd.photoUrl) existingDriver.photoUrl = nd.photoUrl;
-    existingDriver.admin = admin;
-    existingDriver.dateRange = dateRange;
-
-    // Guardar en el directorio maestro de conductores
-    updateMasterRegistry(existingDriver);
-  });
-  
-  saveDrivers(drivers, weekId);
+    // Clear master registry only for this admin
+    if (data.master_drivers) {
+      const filteredMasters: any = {};
+      for (const [key, driver] of Object.entries(data.master_drivers)) {
+        if (((driver as any).admin || '').toLowerCase() !== adminParam.toLowerCase()) {
+          filteredMasters[key] = driver;
+        }
+      }
+      data.master_drivers = filteredMasters;
+    }
+    
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  } else {
+    // Si no hay admin, borrar todo
+    fs.writeFileSync(DB_PATH, JSON.stringify({ master_drivers: {}, syncs: [] }, null, 2));
+  }
 }

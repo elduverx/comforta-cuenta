@@ -17,6 +17,7 @@ interface PlatformData {
   invoiced: number;
   cash: number;
   bonuses: number;
+  cobradoABordo?: number | null;
 }
 interface Driver {
   id: string;
@@ -29,7 +30,7 @@ interface Driver {
 }
 
 // Helper to calculate totals for a driver
-const calculateTotals = (platforms: Record<string, { invoiced: number; cash: number; bonuses: number }>) => {
+const calculateTotals = (platforms: Record<string, PlatformData>) => {
   const platformsList = ['uber', 'cabify', 'bolt', 'privados'];
   let totalBruto = 0;
   let totalEfectivo = 0;
@@ -37,7 +38,11 @@ const calculateTotals = (platforms: Record<string, { invoiced: number; cash: num
   platformsList.forEach((p) => {
     if (platforms[p]) {
       totalBruto += platforms[p].invoiced;
-      totalEfectivo += platforms[p].cash;
+      if (p === 'cabify' && platforms[p].cobradoABordo !== null && platforms[p].cobradoABordo !== undefined) {
+        totalEfectivo += platforms[p].cobradoABordo;
+      } else {
+        totalEfectivo += platforms[p].cash;
+      }
     }
   });
 
@@ -57,6 +62,7 @@ import { addWeeks, subWeeks, format, startOfWeek, endOfWeek, addMonths, subMonth
 import { es } from "date-fns/locale";
 import { DayPicker, type DateRange } from "react-day-picker";
 import "react-day-picker/style.css";
+import * as XLSX from 'xlsx';
 
 export default function UberStyleDashboard() {
   const [currentProfile, setCurrentProfile] = useState("Oscar");
@@ -65,6 +71,7 @@ export default function UberStyleDashboard() {
   const [masterDrivers, setMasterDrivers] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("Liquidaciones");
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
+
 
   useEffect(() => {
     const fetchMaster = () => {
@@ -93,6 +100,55 @@ export default function UberStyleDashboard() {
     from: startOfWeek(new Date(), { weekStartsOn: 1 }),
     to: endOfWeek(new Date(), { weekStartsOn: 1 })
   });
+
+  const exportToExcel = () => {
+    if (!driversData || driversData.length === 0) {
+      alert("No hay datos para exportar en el rango seleccionado.");
+      return;
+    }
+
+    const dataToExport = driversData.map(driver => {
+      const totals = calculateTotals(driver.platforms);
+      return {
+        "Nombre del Conductor": driver.name,
+        "Total Bruto": totals.totalBruto,
+        "Total Efectivo": totals.totalEfectivo,
+        "Admin (65%)": totals.ingresoNetoAdmin,
+        "Flota (35%)": totals.gananciaConductor,
+        "Balance Final": totals.balanceFinal,
+        "Uber - Bruto": driver.platforms.uber ? driver.platforms.uber.invoiced : 0,
+        "Uber - Efectivo": driver.platforms.uber ? driver.platforms.uber.cash : 0,
+        "Cabify - Bruto": driver.platforms.cabify ? driver.platforms.cabify.invoiced : 0,
+        "Cabify - Efectivo": driver.platforms.cabify ? driver.platforms.cabify.cash : 0,
+        "Cabify - Cobrado a bordo": (driver.platforms.cabify && driver.platforms.cabify.cobradoABordo !== null && driver.platforms.cabify.cobradoABordo !== undefined) ? driver.platforms.cabify.cobradoABordo : '-',
+        "Bolt - Bruto": driver.platforms.bolt ? driver.platforms.bolt.invoiced : 0,
+        "Bolt - Efectivo": driver.platforms.bolt ? driver.platforms.bolt.cash : 0,
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    
+    // Auto-ajustar columnas
+    const colWidths = [
+      { wch: 30 }, // Nombre
+      { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, // Totales
+      { wch: 15 }, { wch: 15 }, // Uber
+      { wch: 15 }, { wch: 15 }, { wch: 22 }, // Cabify
+      { wch: 15 }, { wch: 15 } // Bolt
+    ];
+    worksheet['!cols'] = colWidths;
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Liquidaciones");
+    
+    let fromDate = "fecha";
+    let toDate = "fecha";
+    if (selectedRange?.from) fromDate = format(selectedRange.from, 'dd-MM-yyyy');
+    if (selectedRange?.to) toDate = format(selectedRange.to, 'dd-MM-yyyy');
+    
+    const fileName = `Reporte_${currentProfile}_${fromDate}_al_${toDate}.xlsx`;
+    XLSX.writeFile(workbook, fileName);
+  };
 
   useEffect(() => {
     if (viewMode === 'week') {
@@ -246,7 +302,10 @@ export default function UberStyleDashboard() {
             >
               Borrar Datos
             </button>
-            <button className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg shadow hover:bg-gray-800 transition">
+            <button 
+              onClick={exportToExcel}
+              className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg shadow hover:bg-gray-800 transition"
+            >
               Descargar Reporte
             </button>
           </div>
@@ -404,7 +463,7 @@ export default function UberStyleDashboard() {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center gap-3">
                               {driver.photoUrl ? (
-                                <img src={driver.photoUrl} alt={driver.name} className="w-10 h-10 rounded-full border border-gray-200 object-cover shadow-sm" />
+                                <img src={`${driver.photoUrl}?t=${new Date().getTime()}`} alt={driver.name} className="w-10 h-10 rounded-full border border-gray-200 object-cover shadow-sm" />
                               ) : (
                                 <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 border border-gray-200 shadow-sm">
                                   <CircleUser className="w-6 h-6 text-gray-400" />
@@ -450,10 +509,25 @@ export default function UberStyleDashboard() {
                                             <span className="text-gray-500">Ganancias Totales:</span>
                                             <span className="font-bold">€{data.invoiced.toFixed(2)}</span>
                                           </div>
-                                          <div className="flex justify-between text-xs">
-                                            <span className="text-gray-500">Cobro Efectivo:</span>
-                                            <span className="font-bold text-orange-600">€{data.cash.toFixed(2)}</span>
-                                          </div>
+                                          {platform === 'cabify' && data.cobradoABordo !== null && data.cobradoABordo !== undefined ? (
+                                            <div className="flex justify-between text-xs">
+                                              <span className="text-gray-500">Cobrado a bordo:</span>
+                                              <span className="font-bold text-orange-600">€{data.cobradoABordo.toFixed(2)}</span>
+                                            </div>
+                                          ) : (
+                                            <>
+                                              <div className="flex justify-between text-xs">
+                                                <span className="text-gray-500">Cobro Efectivo:</span>
+                                                <span className="font-bold text-orange-600">€{data.cash.toFixed(2)}</span>
+                                              </div>
+                                              {platform === 'cabify' && (
+                                                <div className="flex justify-between text-xs">
+                                                  <span className="text-gray-500">Cobrado a bordo:</span>
+                                                  <span className="font-bold text-orange-600">-</span>
+                                                </div>
+                                              )}
+                                            </>
+                                          )}
                                           <div className="pt-2 mt-2 border-t border-gray-100 flex justify-between text-xs">
                                             <span className="font-bold text-blue-700">Admin (65%):</span>
                                             <span className="font-bold text-blue-700">€{(data.invoiced * 0.65).toFixed(2)}</span>
@@ -511,7 +585,7 @@ export default function UberStyleDashboard() {
               {masterDrivers.map((driver) => (
                 <div key={driver.id} className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-lg transition-all flex items-start gap-4">
                   {driver.photoUrl ? (
-                    <img src={driver.photoUrl} alt={driver.name} className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 shadow-sm" />
+                    <img src={`${driver.photoUrl}?t=${new Date().getTime()}`} alt={driver.name} className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 shadow-sm" />
                   ) : (
                     <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200 shadow-sm">
                       <CircleUser className="w-8 h-8 text-gray-400" />

@@ -32,7 +32,7 @@ Search
 Filter
 Today
 Yesterday
-Jul 29th, 2026 04:00 AM - Aug 1st, 2026 04:00 AM
+Aug 31st, 2026 04:00 AM - Sep 1st, 2026 04:00 AM
 Name
 Total Earnings
 Earnings / hr
@@ -44,40 +44,52 @@ Acceptance
 Cancellation
 Block Cash Trips
 
+JOSE DOMINGO ACOSTA CAICEDO
+
+€239.12
+€33.82
+€40.87
+1.27
+7.07
+9
+8.55%
+0.00%
+Block
+
 GREGORY JOSE MARQUEZ MENDEZ
 
-€851.41
-€30.07
-€33.89
-1.27
-28.31
-36
-14.41%
+€237.77
+€29.04
+€65.65
+1.83
+8.19
+15
+20.51%
 0.00%
+Block
+
+SANTIAGO FORERO RODRIGUEZ
+
+€191.63
+€21.16
+€37.77
+2.43
+9.06
+22
+47.83%
+11.43%
 Block
 
 SHAUKAT ALI KHAN BIBI
 
-€779.74
-€27.55
-€128.36
+€189.58
+€24.01
+€49.32
 1.77
-28.30
-50
-13.84%
-4.92%
-Block
-
-JOSE DOMINGO ACOSTA CAICEDO
-
-€481.81
-€18.29
-€178.19
-1.33
-26.34
-35
-16.76%
-2.33%
+7.90
+14
+15.96%
+0.00%
 Block
 10 rows
 ❮❮

@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       console.table(data.data);
       
       // Guardar en la "base de datos" local
-      syncPlatformData(data.plataforma, data.admin, data.dateRange, data.data);
+      syncPlatformData(data);
       console.log(`💾 Base de datos actualizada con los nuevos datos de ${data.plataforma}`);
     } else {
       console.log("⚠️ No se extrajeron conductores. El formato de la página podría ser diferente.");
