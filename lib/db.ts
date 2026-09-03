@@ -364,6 +364,27 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
     };
   }
 
+  // Uber detailed format: "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM"
+  const uberFull = raw.match(/([a-z]{3})\s+(\d{1,2})(?:st|nd|rd|th)?,\s+(\d{4}).*?-\s*([a-z]{3})\s+(\d{1,2})(?:st|nd|rd|th)?,\s+(\d{4})/i);
+  if (uberFull) {
+     const parseMonth = (m: string) => {
+        const str = m.substring(0,3);
+        return mesesES[str] || monthsEN[str] || '01';
+     };
+     const sMonth = parseMonth(uberFull[1]);
+     const sDay = uberFull[2].padStart(2, '0');
+     const sYear = uberFull[3];
+     
+     const eMonth = parseMonth(uberFull[4]);
+     const eDay = uberFull[5].padStart(2, '0');
+     const eYear = uberFull[6];
+
+     return {
+        startDate: `${sYear}-${sMonth}-${sDay}`,
+        endDate: `${eYear}-${eMonth}-${eDay}`
+     };
+  }
+
   // Bolt / Uber format: "3 ago - 31 ago" or "Aug 10 - Aug 16"
   const textRange = raw.match(/(\d{1,2})\s+([a-z]+)\s*-\s*(\d{1,2})\s+([a-z]+)/);
   if (textRange) {
