@@ -10,112 +10,62 @@ Flota
 Comunicaciones
 Ayuda y soporte
 Salir
-Ficha del conductor
-OS
-Orluis Rafael Salazar Linares
-
-Vehículo actual
--
-Métodos de pago activados
-Efectivo
-Email
-orluisneno+2@gmail.com
-Teléfono
-+34 644575883
-Desactivar
-Reporte
-Viajes
-Datos personales
-Permisos
+Ganancias
+Facturas
 Periodo actualComparativo histórico
-03/08/2026 a 09/08/2026 (S32)
-Ganancias totales
-98,04 €
+17/08/2026 a 23/08/2026 (S34)
+
+Ganancias totales de 17/08/2026 a 23/08/2026 (S34)
+
+75,43 €
 Cobro en app
-72,78 €
+75,43 €
 Cobro en efectivo
-25,26 €
+0,00 €
 Promociones
--
+0,00 €
 Deducciones
--
-Cobrado a bordo
-35,00 €
-Media ganancias / hora
-13,83 €/h
-Horas de conexión
-7 h 5 min
-Tasa de ocupación
-48,43 %
-Horas con ocupación
-3 h 26 min
-Horas sin ocupación
-3 h 39 min
-S24
-S25
-S26
+-0,00 €
 S27
 S28
 S29
 S30
 S31
 S32
+S33
+S34
 0
-8
-16
-24
-32
-0 %
-25 %
-50 %
-75 %
-100 %
-Horas de conexión
-Tasa de ocupación
-Comparativa últimas 8 semanas
-Comparativa últimas 8 semanas
-Tasa de aceptación
-21,05 %
-Viajes perdidos
-16
-Viajes rechazados
-14
-S24
-S25
-S26
-S27
-S28
-S29
-S30
-S31
-S32
-0
-15
-30
-45
-60
-Tasa de aceptación
-Comparativa últimas 8 semanas
-Total viajes finalizadosVer
-8
-Media viajes finalizados / hora
-1,13
-S24
-S25
-S26
-S27
-S28
-S29
-S30
-S31
-S32
-0
-20
-40
-60
-80
-Total viajes finalizados
-Comparativa últimas 8 semanas
-El conteo de viajes se hace a partir de la hora de asignación.
+100
+200
+300
+400
+500
+600
+Cobro en app
+Cobro en efectivo
+Promociones
+
+Ganancias por conductores
+
+Ganancias totalesOtros conceptos
+Nombre
+Cobro en app
+Cobro
+en efectivo
+Promociones
+Deducciones
+Ganancias
+totales
+ 
+JD
+Jose Domingo Acosta Caicedo
+75,43 €
+0,00 €
+0,00 €
+0,00 €
+75,43 €
+Comforta Sync
+Admin: Oscar
+Admin: Eglee
 Sincronizando...
-20
+5

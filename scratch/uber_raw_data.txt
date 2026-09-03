@@ -32,7 +32,7 @@ Search
 Filter
 Today
 Yesterday
-Aug 23rd, 2026 04:00 AM - Aug 30th, 2026 04:00 AM
+Aug 31st, 2026 12:00 AM - Sep 4th, 2026 12:00 AM
 Name
 Total Earnings
 Earnings / hr
@@ -46,50 +46,50 @@ Block Cash Trips
 
 GREGORY JOSE MARQUEZ MENDEZ
 
-€1,595.39
-€29.45
-€198.60
-1.81
-54.17
-98
-25.06%
-4.20%
-Block
-
-SANTIAGO FORERO RODRIGUEZ
-
-€1,443.56
-€24.71
-€218.50
-2.77
-58.41
-162
-47.89%
-7.80%
+€706.53
+€26.04
+€115.77
+1.84
+27.14
+50
+20.88%
+0.00%
 Block
 
 JOSE DOMINGO ACOSTA CAICEDO
 
-€1,376.07
-€24.96
-€131.70
-1.49
-55.13
-82
-12.18%
-5.05%
+€686.67
+€28.32
+€85.52
+1.69
+24.25
+41
+13.90%
+0.00%
+Block
+
+SANTIAGO FORERO RODRIGUEZ
+
+€604.19
+€20.43
+€171.24
+2.40
+29.58
+71
+51.20%
+6.25%
 Block
 
 SHAUKAT ALI KHAN BIBI
 
-€1,295.43
-€24.38
-€237.57
-1.84
-53.13
-98
-15.58%
-3.39%
+€400.68
+€23.24
+€126.43
+1.80
+17.24
+31
+14.80%
+0.00%
 Block
 10 rows
 ❮❮

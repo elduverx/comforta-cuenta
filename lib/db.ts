@@ -379,9 +379,14 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
      const eDay = uberFull[5].padStart(2, '0');
      const eYear = uberFull[6];
 
+     // Uber ends on Monday 04:00 AM, which is technically the end of Sunday.
+     // Subtract 1 day from endDate so it aligns correctly with the 7-day week (Mon-Sun).
+     const realEnd = new Date(Date.UTC(parseInt(eYear), parseInt(eMonth)-1, parseInt(eDay)));
+     realEnd.setUTCDate(realEnd.getUTCDate() - 1);
+
      return {
         startDate: `${sYear}-${sMonth}-${sDay}`,
-        endDate: `${eYear}-${eMonth}-${eDay}`
+        endDate: realEnd.toISOString().split('T')[0]
      };
   }
 

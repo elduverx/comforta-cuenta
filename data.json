@@ -36,12 +36,33 @@
   "UNKNOWN": [],
   "syncs": [
     {
-      "id": "uber_Oscar_2026-08-31_2026-09-07",
+      "id": "cabify_Oscar_2026-08-17_2026-08-23",
+      "platform": "cabify",
+      "admin": "Oscar",
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-23",
+      "timestamp": "2026-09-03T11:24:20.749Z",
+      "drivers": [
+        {
+          "id": "josedomingoacostacaicedo",
+          "name": "Jose Domingo Acosta Caicedo",
+          "initials": "JD",
+          "photoUrl": "/avatars/cabify_jose_domingo_acosta_caicedo.png",
+          "admin": "Oscar",
+          "invoiced": 75.43,
+          "cash": 0,
+          "bonuses": 0,
+          "cobradoABordo": null
+        }
+      ]
+    },
+    {
+      "id": "uber_Oscar_2026-08-31_2026-09-03",
       "platform": "uber",
       "admin": "Oscar",
       "startDate": "2026-08-31",
-      "endDate": "2026-09-07",
-      "timestamp": "2026-09-03T11:17:13.357Z",
+      "endDate": "2026-09-03",
+      "timestamp": "2026-09-03T11:25:56.232Z",
       "drivers": [
         {
           "id": "gregoryjosemarquezmendez",
@@ -51,7 +72,7 @@
           "admin": "Oscar",
           "invoiced": 706.53,
           "cash": 115.77,
-          "bonuses": 26.18,
+          "bonuses": 26.04,
           "cobradoABordo": null
         },
         {
@@ -85,114 +106,6 @@
           "invoiced": 400.68,
           "cash": 126.43,
           "bonuses": 23.24,
-          "cobradoABordo": null
-        }
-      ]
-    },
-    {
-      "id": "uber_Oscar_2026-08-16_2026-08-23",
-      "platform": "uber",
-      "admin": "Oscar",
-      "startDate": "2026-08-16",
-      "endDate": "2026-08-23",
-      "timestamp": "2026-09-03T11:17:37.966Z",
-      "drivers": [
-        {
-          "id": "josedomingoacostacaicedo",
-          "name": "JOSE DOMINGO ACOSTA CAICEDO",
-          "initials": "JD",
-          "photoUrl": "/avatars/uber_jose_domingo_acosta_caicedo.jpg",
-          "admin": "Oscar",
-          "invoiced": 1498.93,
-          "cash": 296.54,
-          "bonuses": 30.03,
-          "cobradoABordo": null
-        },
-        {
-          "id": "gregoryjosemarquezmendez",
-          "name": "GREGORY JOSE MARQUEZ MENDEZ",
-          "initials": "GJ",
-          "photoUrl": "/avatars/uber_gregory_jose_marquez_mendez.jpg",
-          "admin": "Oscar",
-          "invoiced": 1461.49,
-          "cash": 232.76,
-          "bonuses": 26.37,
-          "cobradoABordo": null
-        },
-        {
-          "id": "santiagoforerorodriguez",
-          "name": "SANTIAGO FORERO RODRIGUEZ",
-          "initials": "SF",
-          "photoUrl": "/avatars/uber_santiago_forero_rodriguez.jpg",
-          "admin": "Oscar",
-          "invoiced": 1365.76,
-          "cash": 216.59,
-          "bonuses": 28.56,
-          "cobradoABordo": null
-        },
-        {
-          "id": "shaukatalikhanbibi",
-          "name": "SHAUKAT ALI KHAN BIBI",
-          "initials": "SA",
-          "photoUrl": "/avatars/uber_shaukat_ali_khan_bibi.jpg",
-          "admin": "Oscar",
-          "invoiced": 1118.82,
-          "cash": 178.73,
-          "bonuses": 27.37,
-          "cobradoABordo": null
-        }
-      ]
-    },
-    {
-      "id": "uber_Oscar_2026-08-23_2026-08-30",
-      "platform": "uber",
-      "admin": "Oscar",
-      "startDate": "2026-08-23",
-      "endDate": "2026-08-30",
-      "timestamp": "2026-09-03T11:17:51.150Z",
-      "drivers": [
-        {
-          "id": "gregoryjosemarquezmendez",
-          "name": "GREGORY JOSE MARQUEZ MENDEZ",
-          "initials": "GJ",
-          "photoUrl": "/avatars/uber_gregory_jose_marquez_mendez.jpg",
-          "admin": "Oscar",
-          "invoiced": 1595.39,
-          "cash": 198.6,
-          "bonuses": 29.45,
-          "cobradoABordo": null
-        },
-        {
-          "id": "santiagoforerorodriguez",
-          "name": "SANTIAGO FORERO RODRIGUEZ",
-          "initials": "SF",
-          "photoUrl": "/avatars/uber_santiago_forero_rodriguez.jpg",
-          "admin": "Oscar",
-          "invoiced": 1443.56,
-          "cash": 218.5,
-          "bonuses": 24.71,
-          "cobradoABordo": null
-        },
-        {
-          "id": "josedomingoacostacaicedo",
-          "name": "JOSE DOMINGO ACOSTA CAICEDO",
-          "initials": "JD",
-          "photoUrl": "/avatars/uber_jose_domingo_acosta_caicedo.jpg",
-          "admin": "Oscar",
-          "invoiced": 1376.07,
-          "cash": 131.7,
-          "bonuses": 24.96,
-          "cobradoABordo": null
-        },
-        {
-          "id": "shaukatalikhanbibi",
-          "name": "SHAUKAT ALI KHAN BIBI",
-          "initials": "SA",
-          "photoUrl": "/avatars/uber_shaukat_ali_khan_bibi.jpg",
-          "admin": "Oscar",
-          "invoiced": 1295.43,
-          "cash": 237.57,
-          "bonuses": 24.38,
           "cobradoABordo": null
         }
       ]

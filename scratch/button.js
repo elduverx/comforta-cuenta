@@ -1,10 +1,3 @@
-// Este script se inyecta automáticamente en las páginas de Uber, Cabify o Bolt.
-
-function parseEuro(val) {
-  if (!val || val === '-') return 0;
-  return parseFloat(val.replace('€', '').replace(/\./g, '').replace(',', '.'));
-}
-
 function createFloatingMenu() {
   if (document.getElementById('comforta-extract-btn')) return;
 
@@ -335,9 +328,3 @@ function createFloatingMenu() {
 
   document.body.appendChild(btn);
 }
-if (document.body) {
-  createFloatingMenu();
-} else {
-  document.addEventListener('DOMContentLoaded', createFloatingMenu);
-}
-setInterval(createFloatingMenu, 2000);
