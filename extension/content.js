@@ -48,7 +48,10 @@ function createFloatingMenu() {
     let rawDateRange = "";
 
     // Extract Date Text from Screen
-    const allText = lines.join(' ');
+    // Include input values since date pickers are often input fields
+    const inputValues = Array.from(document.querySelectorAll('input')).map(i => i.value).join(' ');
+    const allText = lines.join(' ') + ' ' + inputValues;
+    
     if (plataforma === 'cabify') {
        const match = allText.match(/\d{2}\/\d{2}\/\d{4}.*?a.*?\d{2}\/\d{2}\/\d{4}/i);
        if (match) rawDateRange = match[0];
