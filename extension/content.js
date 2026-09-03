@@ -316,7 +316,7 @@ function createFloatingMenu() {
       admin: admin,
       rawDateRange: rawDateRange,
       data: drivers,
-      rawText: rawText,
+      rawText: pageText,
       timestamp: new Date().toISOString()
     };
 
