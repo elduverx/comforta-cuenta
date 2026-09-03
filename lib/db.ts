@@ -333,8 +333,8 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
 
   const raw = rawDateRange.toLowerCase().trim();
 
-  // Cabify format: "10/08/2026 a 16/08/2026" or "10/08/2026"
-  const cabifyRange = raw.match(/(\d{2})\/(\d{2})\/(\d{4}).*?a.*?(\d{2})\/(\d{2})\/(\d{4})/);
+  // Cabify format: "10/08/2026 a 16/08/2026" or "01/08/2026 - 31/08/2026"
+  const cabifyRange = raw.match(/(\d{2})\/(\d{2})\/(\d{4}).*?(?:a|-).*?(\d{2})\/(\d{2})\/(\d{4})/);
   if (cabifyRange) {
     return {
       startDate: `${cabifyRange[3]}-${cabifyRange[2]}-${cabifyRange[1]}`,

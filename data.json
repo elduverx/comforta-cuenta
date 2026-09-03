@@ -163,6 +163,92 @@
           "cobradoABordo": null
         }
       ]
+    },
+    {
+      "id": "bolt_Oscar_2026-08-31_2026-09-06",
+      "platform": "bolt",
+      "admin": "Oscar",
+      "startDate": "2026-08-31",
+      "endDate": "2026-09-06",
+      "timestamp": "2026-09-03T11:35:17.217Z",
+      "drivers": [
+        {
+          "id": "santiagoforerorodriguez",
+          "name": "Santiago Forero Rodriguez",
+          "initials": "SF",
+          "photoUrl": null,
+          "admin": "Oscar",
+          "invoiced": 8.03,
+          "cash": 10.7,
+          "bonuses": 0,
+          "cobradoABordo": null
+        },
+        {
+          "id": "shaukatalikhanbibi",
+          "name": "Shaukat Ali Khan Bibi",
+          "initials": "SA",
+          "photoUrl": null,
+          "admin": "Oscar",
+          "invoiced": 148.35,
+          "cash": 50.4,
+          "bonuses": 0,
+          "cobradoABordo": null
+        }
+      ]
+    },
+    {
+      "id": "bolt_Oscar_2026-08-01_2026-08-31",
+      "platform": "bolt",
+      "admin": "Oscar",
+      "startDate": "2026-08-01",
+      "endDate": "2026-08-31",
+      "timestamp": "2026-09-03T11:37:08.638Z",
+      "drivers": [
+        {
+          "id": "gregoryjosemarquezmendez",
+          "name": "Gregory Jose Marquez Mendez",
+          "initials": "GJ",
+          "photoUrl": null,
+          "admin": "Oscar",
+          "invoiced": 210.98,
+          "cash": 244.35,
+          "bonuses": 0,
+          "cobradoABordo": null
+        },
+        {
+          "id": "orluisrafaelsalazarlinares",
+          "name": "Orluis Rafael Salazar Linares",
+          "initials": "OR",
+          "photoUrl": null,
+          "admin": "Oscar",
+          "invoiced": 808.61,
+          "cash": 204.9,
+          "bonuses": 0,
+          "cobradoABordo": null
+        },
+        {
+          "id": "santiagoforerorodriguez",
+          "name": "Santiago Forero Rodriguez",
+          "initials": "SF",
+          "photoUrl": null,
+          "admin": "Oscar",
+          "invoiced": 8.03,
+          "cash": 10.7,
+          "bonuses": 0,
+          "cobradoABordo": null
+        },
+        {
+          "id": "shaukatalikhanbibi",
+          "name": "Shaukat Ali Khan Bibi",
+          "initials": "SA",
+          "photoUrl": null,
+          "admin": "Oscar",
+          "invoiced": 925.3,
+          "cash": 467.4,
+          "bonuses": 0,
+          "cobradoABordo": null
+        }
+      ]
     }
   ]
 }
