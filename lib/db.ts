@@ -390,8 +390,8 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
      };
   }
 
-  // Bolt / Uber format: "3 ago - 31 ago" or "Aug 10 - Aug 16"
-  const textRange = raw.match(/(\d{1,2})\s+([a-z]+)\s*-\s*(\d{1,2})\s+([a-z]+)/);
+  // Bolt / Uber format: "3 ago - 31 ago", "3 sep. - 3 sep.", "3 sep - 3 sep"
+  const textRange = raw.match(/(\d{1,2})\s+([a-z]+)\.?\s*[-–—]\s*(\d{1,2})\s+([a-z]+)\.?/i);
   if (textRange) {
      const parseMonth = (m: string) => {
         const str = m.substring(0,3);
@@ -401,6 +401,8 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
      const eMonth = parseMonth(textRange[4]);
      const sDay = textRange[1].padStart(2, '0');
      const eDay = textRange[3].padStart(2, '0');
+     
+     // Handle same day cases like "3 sep - 3 sep"
      return {
         startDate: `${currentYear}-${sMonth}-${sDay}`,
         endDate: `${currentYear}-${eMonth}-${eDay}`
@@ -408,7 +410,7 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
   }
   
   // Uber format inverted: "Aug 10 - Aug 16" -> "aug 10 - aug 16"
-  const textRangeInv = raw.match(/([a-z]+)\s+(\d{1,2})\s*-\s*([a-z]+)\s+(\d{1,2})/);
+  const textRangeInv = raw.match(/([a-z]+)\.?\s+(\d{1,2})\s*[-–—]\s*([a-z]+)\.?\s+(\d{1,2})/i);
   if (textRangeInv) {
      const parseMonth = (m: string) => {
         const str = m.substring(0,3);
@@ -425,7 +427,7 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
   }
 
   // Text single day: "3 ago" or "Aug 3"
-  const textDay = raw.match(/(\d{1,2})\s+([a-z]+)/);
+  const textDay = raw.match(/(\d{1,2})\s+([a-z]+)\.?/i);
   if (textDay) {
      const mStr = textDay[2].substring(0,3);
      const num = mesesES[mStr] || monthsEN[mStr] || '01';
@@ -433,7 +435,7 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
      return { startDate: d, endDate: d };
   }
   
-  const textDayInv = raw.match(/([a-z]+)\s+(\d{1,2})/);
+  const textDayInv = raw.match(/([a-z]+)\.?\s+(\d{1,2})/i);
   if (textDayInv) {
      const mStr = textDayInv[1].substring(0,3);
      const num = mesesES[mStr] || monthsEN[mStr] || '01';

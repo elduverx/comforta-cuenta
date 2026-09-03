@@ -57,7 +57,7 @@ function createFloatingMenu() {
          if (sMatch) rawDateRange = sMatch[0];
        }
     } else if (plataforma === 'bolt') {
-       const match = allText.match(/\d{1,2}\s+[a-z]{3}\s+-\s+\d{1,2}\s+[a-z]{3}/i);
+       const match = allText.match(/\d{1,2}\s+[a-z]{3,5}\.?\s*[-–—]\s*\d{1,2}\s+[a-z]{3,5}\.?/i);
        if (match) rawDateRange = match[0];
     } else if (plataforma === 'uber') {
        // Uber format 1: "Aug 31st, 2026 04:00 AM - Sep 7th, 2026 04:00 AM"
