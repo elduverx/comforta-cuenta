@@ -1,109 +1,86 @@
 import { NextResponse } from 'next/server';
-
-// Evitar problemas de CORS ya que la extensión llama desde un dominio distinto
-export async function OPTIONS(request: Request) {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
-}
-
-import fs from 'fs';
-import path from 'path';
 import { syncPlatformData } from '@/lib/db';
+import Anthropic from '@anthropic-ai/sdk';
 
-async function downloadAndSaveAvatar(url: string, platform: string, driverName: string): Promise<string> {
-  if (!url || url.startsWith('/avatars/')) return url;
-  
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return url;
-    
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    
-    const safeName = driverName.toLowerCase().replace(/[^a-z0-9]/g, '_');
-    const ext = url.includes('.png') ? '.png' : '.jpg';
-    const filename = `${platform}_${safeName}${ext}`;
-    
-    const avatarsDir = path.join(process.cwd(), 'public', 'avatars');
-    if (!fs.existsSync(avatarsDir)) {
-      fs.mkdirSync(avatarsDir, { recursive: true });
-    }
-    
-    fs.writeFileSync(path.join(avatarsDir, filename), buffer);
-    return `/avatars/${filename}`;
-  } catch (error) {
-    console.error("Failed to download avatar:", error);
-    return url;
-  }
-}
+// Configuración de Claude
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY || '',
+});
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const payload = await request.json();
     
-    console.log("=========================================");
-    console.log(`🚀 ¡NUEVA SINCRONIZACIÓN DE ${data.plataforma.toUpperCase()}!`);
-    console.log("=========================================");
-    console.log("URL de origen:", data.url);
-    
-    if (data.data && data.data.length > 0) {
-      // Persistir las imágenes localmente
-      for (const driver of data.data) {
-        if (driver.photoUrl) {
-          driver.photoUrl = await downloadAndSaveAvatar(driver.photoUrl, data.plataforma, driver.nombre);
-        }
+    // Si el payload ya trae los datos (ej. si estaban usando la versión vieja de la extensión)
+    // O si la extensión nueva solo trae rawText
+    if (!payload.data && payload.rawText) {
+      if (!process.env.ANTHROPIC_API_KEY) {
+        return NextResponse.json({ error: 'Falta ANTHROPIC_API_KEY en .env.local' }, { status: 500 });
       }
 
-      console.log(`✅ Se extrajeron ${data.data.length} conductores con éxito:`);
-      console.table(data.data);
+      console.log(`Llamando a Claude para analizar texto de ${payload.plataforma}...`);
+
+      const systemPrompt = `
+      Eres una IA contable experta. Tu tarea es extraer la fecha de inicio, fecha de fin y la tabla de conductores de este texto en crudo copiado de un portal de ${payload.plataforma}.
       
-      // Guardar en la "base de datos" local
-      syncPlatformData(data);
-      console.log(`💾 Base de datos actualizada con los nuevos datos de ${data.plataforma}`);
-    } else {
-      console.log("⚠️ No se extrajeron conductores. El formato de la página podría ser diferente.");
-    }
-    
-    // Guardar el texto extraído en un archivo local por si necesitamos depurar
-    if (data.rawText) {
-      const filePath = path.join(process.cwd(), 'scratch', `${data.plataforma}_raw_data.txt`);
-      if (!fs.existsSync(path.dirname(filePath))) {
-        fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      Reglas estrictas:
+      1. Extrae la fecha en que se enmarca este reporte. Para Uber las fechas terminan el lunes a las 04:00 AM, así que el endDate debe ser el domingo anterior.
+      2. Extrae la lista de conductores.
+      3. Para Bolt: extrae 'Ingresos brutos (total)' como totalBruto, e 'Ingresos brutos (pagos en efectivo)' como totalEfectivo.
+      4. Para Cabify: extrae 'Ganancias totales' como totalBruto, y 'Cobrado a bordo' como cobradoABordo (si no existe, pon null).
+      5. Para Uber: extrae el Total Earnings como totalBruto y Cash Earnings como totalEfectivo.
+      6. Todas las cifras monetarias deben ser números decimales float (ej. 1200.50). Ten en cuenta el formato europeo (comas y puntos).
+      7. Debes devolver ESTRICTAMENTE y ÚNICAMENTE un objeto JSON válido con la siguiente estructura, sin texto adicional antes ni después:
+      {
+        "startDate": "YYYY-MM-DD",
+        "endDate": "YYYY-MM-DD",
+        "data": [
+          {
+            "nombre": "Nombre del Conductor",
+            "totalBruto": 0.0,
+            "totalEfectivo": 0.0,
+            "cobradoABordo": null,
+            "bonos": 0.0,
+            "photoUrl": ""
+          }
+        ]
+      }`;
+
+      const response = await anthropic.messages.create({
+        model: "claude-3-5-sonnet-20240620",
+        max_tokens: 2000,
+        temperature: 0.1,
+        system: systemPrompt,
+        messages: [
+          { role: "user", content: "Texto a analizar:\n" + payload.rawText }
+        ]
+      });
+
+      const jsonString = response.content[0].text;
+      
+      try {
+         const parsedAiData = JSON.parse(jsonString);
+         console.log("IA extrajo correctamente:", parsedAiData);
+         
+         // Inyectar al payload para la base de datos
+         payload.data = parsedAiData.data;
+         payload.startDate = parsedAiData.startDate;
+         payload.endDate = parsedAiData.endDate;
+         
+         // Quitamos el rawDateRange para que lib/db.ts no intente reescribir las fechas que dio Claude
+         delete payload.rawDateRange;
+      } catch(err) {
+         console.error("Claude no devolvió JSON válido:", jsonString);
+         return NextResponse.json({ error: 'La IA no devolvió un formato correcto' }, { status: 500 });
       }
-      fs.writeFileSync(filePath, data.rawText);
     }
 
-    if (data.rawHtml) {
-      const htmlPath = path.join(process.cwd(), 'scratch', `${data.plataforma}_raw_html.html`);
-      fs.writeFileSync(htmlPath, data.rawHtml);
-      console.log(`✅ HTML en bruto guardado para extraer fotos y nombres de admin.`);
-    }
+    // Pasamos el payload (ya sea el original de la vieja extensión o el enriquecido por la IA)
+    syncPlatformData(payload);
     
-    return NextResponse.json(
-      { success: true, message: 'Datos recibidos correctamente', data },
-      {
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      }
-    );
+    return NextResponse.json({ success: true, timestamp: new Date() });
   } catch (error) {
-    console.error("Error procesando los datos de la extensión:", error);
-    return NextResponse.json(
-      { success: false, error: 'Error procesando datos' },
-      { 
-        status: 500,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        }
-      }
-    );
+    console.error('Error procesando sync:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -1,33 +1,71 @@
 Operaciones
+Seguimiento
+Mapa
+Historial de viajes
+Registro de actividad
+Gestión
+Planificación de turnos
+Asignación de viajes
+Documentos a renovar
 Finanzas
+Informes
+Rendimiento de la empresa
+Ingresos de la empresa
+Ingresos por conductor
+Facturas
+Pagos
+De Bolt a la flota
+Informes fiscales
+De la flota al pasajero
+Compensaciones
+Campañas
+Activas y próximas
+Terminadas
 Flota
+Conductores
+Rendimiento
+Solicitudes
+Vehículos
+Rendimiento
+Solicitudes
 Configuración
+Configuración de la empresa
+Contactos
+Información bancaria
+Información fiscal
+Conexiones API de datos
+Preferencias del usuario
+oabm1984@gmail.com
+Configuración de notificación
+Selección de idioma
+Notificaciones
+Soporte
 
 OSCAR ALEJANDRO BEDOYA MONSALVE
 
 Ingresos por conductor
 Resumen de los ingresos de la empresa y de los conductores. Los ingresos se registran cuando la tarifa es final, no cuando se hace el viaje. Las revisiones de precios, los ajustes o las propinas pueden cambiar cuando la tarifa es final. Para más información sobre términos y lo que significan, accede a nuestro glosario.
-Personalizado
+Últimos 7 días
 Ingresos brutos (total)
-2563,8
+208,5
 €
 Total tasas
-610,89
+52,13
 €
 Ingresos netos
-1952,91
+156,38
 €
 Ingresos de campañas de flotas
-110,25
+0
 €
 Reembolsos de gastos de la flota
 0
 €
 Ingresos brutos por hora
-31,28
+18,42
 €/h
 Ingresos netos por hora
-23,83
+13,82
 €/h
 Descargar
 Conductor/a
@@ -57,108 +95,6 @@ Ingresos netos por hora
 Descuento en la comisión (en la app)
 	
 Descuento en la comisión (efectivo)
-
-
-Gregory Jose Marquez Mendez
-	
-281,3
-€
-	
-28,1
-€
-IVA:
-2,2
-€
-	
-253,2
-€
-IVA:
-22,22
-€
-	
-244,35
-€
-	
-—
-	
-—
-IVA:
-—
-	
-—
-IVA:
-—
-	
-—
-IVA:
-—
-	
-210,98
-€
-	
-40,52
-€/h
-	
-30,39
-€/h
-	
-4,0
-€
-	
-8,85
-€
-
-
-Orluis Rafael Salazar Linares
-	
-1039,4
-€
-	
-656,7
-€
-IVA:
-51,2
-€
-	
-266,45
-€
-IVA:
-18,63
-€
-	
-204,9
-€
-	
-6,0
-€
-	
-110,25
-€
-IVA:
-—
-	
-—
-IVA:
-—
-	
-—
-IVA:
-—
-	
-808,61
-€
-	
-35,58
-€/h
-	
-27,68
-€/h
-	
-93,4
-€
-	
-61,55
-€
 
 
 Santiago Forero Rodriguez
@@ -196,10 +132,10 @@ IVA:
 8,03
 €
 	
-12,56
+10,97
 €/h
 	
-9,42
+8,23
 €/h
 	
 —
@@ -209,26 +145,29 @@ IVA:
 
 Shaukat Ali Khan Bibi
 	
-1232,4
+197,8
 €
 	
-634,65
+131,15
 €
 IVA:
-48,09
+10,06
 €
 	
-581,5
+66,65
 €
 IVA:
-42,49
+4,6
 €
 	
-467,4
+50,4
 €
 	
-4,0
-€
+—
+	
+—
+IVA:
+—
 	
 —
 IVA:
@@ -238,24 +177,18 @@ IVA:
 IVA:
 —
 	
-12,25
-€
-IVA:
-1,11
+148,35
 €
 	
-925,3
-€
-	
-27,44
+19,41
 €/h
 	
-20,6
+14,56
 €/h
 	
-105,4
+20,55
 €
 	
-114,1
+16,25
 €
 Sincronizando...

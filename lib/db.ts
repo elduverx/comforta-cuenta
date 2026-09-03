@@ -391,7 +391,7 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
   }
 
   // Bolt / Uber format: "3 ago - 31 ago", "3 sep. - 3 sep.", "3 sep - 3 sep"
-  const textRange = raw.match(/(\d{1,2})\s+([a-z]+)\.?\s*[-–—]\s*(\d{1,2})\s+([a-z]+)\.?/i);
+  const textRange = raw.match(/(\d{1,2})\s*([a-z]+)\.?\s*[-–—]\s*(\d{1,2})\s*([a-z]+)\.?/i);
   if (textRange) {
      const parseMonth = (m: string) => {
         const str = m.substring(0,3);
@@ -410,7 +410,7 @@ export function parseRawDateRange(rawDateRange: string): { startDate: string, en
   }
   
   // Uber format inverted: "Aug 10 - Aug 16" -> "aug 10 - aug 16"
-  const textRangeInv = raw.match(/([a-z]+)\.?\s+(\d{1,2})\s*[-–—]\s*([a-z]+)\.?\s+(\d{1,2})/i);
+  const textRangeInv = raw.match(/([a-z]+)\.?\s*(\d{1,2})\s*[-–—]\s*([a-z]+)\.?\s*(\d{1,2})/i);
   if (textRangeInv) {
      const parseMonth = (m: string) => {
         const str = m.substring(0,3);
